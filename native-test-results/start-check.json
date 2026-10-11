@@ -1,0 +1,54 @@
+{
+  "result": "passed",
+  "version": "0.1.4",
+  "sha256": "8d41ba601724bfd3490a1ae216b804ecb31cd38c25223cf92ba9dff72a1690ac",
+  "physicalDeviceTested": false,
+  "starts": [
+    {
+      "iteration": 1,
+      "entryCheckMillisecondsIncluding350msUiWait": 632,
+      "systemMemory": "total       used       free    maxused    maxfree  nused  nfree name\r\n  130222076   12680960  117541116   13763880  116398936   1060    301 Umem"
+    },
+    {
+      "iteration": 2,
+      "entryCheckMillisecondsIncluding350msUiWait": 618,
+      "systemMemory": "total       used       free    maxused    maxfree  nused  nfree name\r\n  130222076   12681128  117540948   13763880  116398936   1060    301 Umem"
+    },
+    {
+      "iteration": 3,
+      "entryCheckMillisecondsIncluding350msUiWait": 621,
+      "systemMemory": "total       used       free    maxused    maxfree  nused  nfree name\r\n  130222076   12681320  117540756   13763880  116398936   1060    302 Umem"
+    },
+    {
+      "iteration": 4,
+      "entryCheckMillisecondsIncluding350msUiWait": 622,
+      "systemMemory": "total       used       free    maxused    maxfree  nused  nfree name\r\n  130222076   12681600  117540476   13763880  116398936   1060    301 Umem"
+    },
+    {
+      "iteration": 5,
+      "entryCheckMillisecondsIncluding350msUiWait": 621,
+      "systemMemory": "total       used       free    maxused    maxfree  nused  nfree name\r\n  130222076   12682360  117539716   13763880  116398936   1062    302 Umem"
+    },
+    {
+      "iteration": 6,
+      "entryCheckMillisecondsIncluding350msUiWait": 622,
+      "systemMemory": "total       used       free    maxused    maxfree  nused  nfree name\r\n  130222076   12682560  117539516   13763880  116398936   1062    300 Umem"
+    },
+    {
+      "iteration": 7,
+      "entryCheckMillisecondsIncluding350msUiWait": 620,
+      "systemMemory": "total       used       free    maxused    maxfree  nused  nfree name\r\n  130222076   12682744  117539332   13763880  116398936   1062    302 Umem"
+    },
+    {
+      "iteration": 8,
+      "entryCheckMillisecondsIncluding350msUiWait": 621,
+      "systemMemory": "total       used       free    maxused    maxfree  nused  nfree name\r\n  130222076   12683048  117539028   13763880  116398936   1062    302 Umem"
+    }
+  ],
+  "realEnglishScene": [
+    12,
+    155
+  ],
+  "contactScreensDifferent": true,
+  "systemMemoryMeaning": "Whole simulator system, not an isolated app heap measurement; no controlled before/after performance claim."
+}

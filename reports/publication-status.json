@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-12",
+  "version": "0.1.4",
+  "developmentStatus": "paused-by-user",
+  "packageSha256": "8d41ba601724bfd3490a1ae216b804ecb31cd38c25223cf92ba9dff72a1690ac",
+  "packageBytes": 22754673,
+  "runtimeChangedForPublication": false,
+  "latestUserFeedback": "可以下载，但是依旧卡顿",
+  "previousUserFeedback": "手表实测可以安装",
+  "fullPhysicalValidation": false,
+  "lagRootCauseConfirmed": false,
+  "regressionTestsPassed": 35,
+  "performanceAnalysis": "docs/PERFORMANCE.md",
+  "historicalReportsRetained": true
+}

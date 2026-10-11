@@ -1,0 +1,7 @@
+<script>
+export default {
+  onCreate() { console.log('STEINS_RW5 app created'); },
+  onDestroy() { console.log('STEINS_RW5 app destroyed'); }
+}
+</script>
+

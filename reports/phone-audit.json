@@ -1,0 +1,557 @@
+{
+  "result": "passed",
+  "guide": "https://www.bilibili.com/opus/1009312096192561201",
+  "guideAuthor": "罪域0811",
+  "guideCheckedVia": "browser-visible article and original game glyph font",
+  "phoneWindows": 28,
+  "dmailWindows": 4,
+  "dmails": [
+    {
+      "source": "SG06_23",
+      "cursor": 1123,
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG07_13",
+      "cursor": 394,
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG09_10",
+      "cursor": 494,
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG09_11",
+      "cursor": 623,
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    }
+  ],
+  "noninteractive": [],
+  "actionVariants": 38,
+  "mailWindows": 176,
+  "replyVariants": 163,
+  "routeInteractionsChecked": 829,
+  "criticalReplies": [
+    {
+      "incomingId": 297,
+      "replyId": 299,
+      "keywordIndex": 1,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 301,
+      "replyId": 303,
+      "keywordIndex": 1,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 304,
+      "replyId": 306,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 308,
+      "replyId": 312,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 316,
+      "replyId": 318,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 324,
+      "replyId": 329,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 335,
+      "replyId": 336,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 341,
+      "replyId": 342,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 344,
+      "replyId": 346,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 354,
+      "replyId": 362,
+      "keywordIndex": 2,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 377,
+      "replyId": 378,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 381,
+      "replyId": 383,
+      "keywordIndex": 1,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    },
+    {
+      "incomingId": 386,
+      "replyId": 387,
+      "keywordIndex": 0,
+      "keywordGlyphs": "",
+      "matchedOriginalMail": true,
+      "selectedInValidatedRoute": true
+    }
+  ],
+  "windows": [
+    {
+      "source": "SG01_03",
+      "cursor": 244,
+      "actions": [
+        {
+          "action": "call",
+          "id": 3
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG01_08",
+      "cursor": 222,
+      "actions": [
+        {
+          "action": "call",
+          "id": 1
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG01_09",
+      "cursor": 582,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 4
+        },
+        {
+          "action": "compose",
+          "id": 1
+        },
+        {
+          "action": "compose",
+          "id": 0
+        },
+        {
+          "action": "compose",
+          "id": 9
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG01_09",
+      "cursor": 801,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 4
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG01_09",
+      "cursor": 833,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 4
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG01_09",
+      "cursor": 863,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 4
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG01_09",
+      "cursor": 894,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 4
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG01_12",
+      "cursor": 218,
+      "actions": [
+        {
+          "action": "call",
+          "id": 3
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG02_08",
+      "cursor": 22,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 4
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG02_12",
+      "cursor": 27,
+      "actions": [
+        {
+          "action": "call",
+          "id": 0
+        },
+        {
+          "action": "call",
+          "id": 1
+        },
+        {
+          "action": "call",
+          "id": 2
+        },
+        {
+          "action": "call",
+          "id": 3
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG02_12",
+      "cursor": 120,
+      "actions": [
+        {
+          "action": "call",
+          "id": 1
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG02_12",
+      "cursor": 210,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 0
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG03_13",
+      "cursor": 237,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 5
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG04_13",
+      "cursor": 934,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 4
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG04_14",
+      "cursor": 174,
+      "actions": [
+        {
+          "action": "call",
+          "id": 2
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG04_18",
+      "cursor": 21,
+      "actions": [
+        {
+          "action": "call",
+          "id": 7
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG06_02",
+      "cursor": 472,
+      "actions": [
+        {
+          "action": "call",
+          "id": 0
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG06_08",
+      "cursor": 60,
+      "actions": [
+        {
+          "action": "call",
+          "id": 0
+        },
+        {
+          "action": "call",
+          "id": 2
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG06_15",
+      "cursor": 15,
+      "actions": [
+        {
+          "action": "call",
+          "id": 8
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG06_18",
+      "cursor": 220,
+      "actions": [
+        {
+          "action": "call",
+          "id": 0
+        },
+        {
+          "action": "call",
+          "id": 7
+        },
+        {
+          "action": "call",
+          "id": 1
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG07_06",
+      "cursor": 56,
+      "actions": [
+        {
+          "action": "call",
+          "id": 9
+        },
+        {
+          "action": "compose",
+          "id": 9
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG07_06",
+      "cursor": 58,
+      "actions": [
+        {
+          "action": "compose",
+          "id": 9
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG07_06",
+      "cursor": 183,
+      "actions": [
+        {
+          "action": "call",
+          "id": 1
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG07_06",
+      "cursor": 279,
+      "actions": [
+        {
+          "action": "call",
+          "id": 9
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG08_03",
+      "cursor": 131,
+      "actions": [
+        {
+          "action": "call",
+          "id": 3
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG08_12",
+      "cursor": 323,
+      "actions": [
+        {
+          "action": "call",
+          "id": 3
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG09_03",
+      "cursor": 149,
+      "actions": [
+        {
+          "action": "call",
+          "id": 3
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    },
+    {
+      "source": "SG09_03",
+      "cursor": 299,
+      "actions": [
+        {
+          "action": "call",
+          "id": 3
+        }
+      ],
+      "cancelThenReopen": true,
+      "cancelThenSkipStops": true,
+      "saveRestore": true
+    }
+  ],
+  "scope": "Every PhoneSG_14/15 and D-Mail thread site in all SG scripts; every incoming mail record and reply transition; choices on six ending paths. Does not exhaust every combination of all optional replies or every sentence presentation.",
+  "physicalDeviceTested": false
+}

@@ -1,0 +1,1284 @@
+{
+  "route": "true",
+  "frames": 27546,
+  "choices": 193,
+  "calls": 78205,
+  "ending": "真结局",
+  "endingFlags": {
+    "F:807": 1,
+    "F:806": 1
+  },
+  "mailFlags": {
+    "297": 18,
+    "299": 2,
+    "301": 18,
+    "303": 2,
+    "304": 18,
+    "306": 2,
+    "308": 18,
+    "312": 2,
+    "316": 18,
+    "318": 2,
+    "324": 18,
+    "329": 2,
+    "334": 2,
+    "335": 18,
+    "336": 2,
+    "338": 2,
+    "340": 2,
+    "341": 18,
+    "342": 2,
+    "344": 18,
+    "346": 2,
+    "354": 18,
+    "362": 2,
+    "371": 2,
+    "377": 18,
+    "378": 2,
+    "379": 2,
+    "380": 2,
+    "381": 18,
+    "383": 2,
+    "385": 2,
+    "386": 18,
+    "387": 2
+  },
+  "actions": [
+    {
+      "scene": "SG00_01",
+      "kind": "mailView",
+      "parent": 0,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG01_03",
+      "kind": "phone",
+      "action": "call",
+      "id": 3
+    },
+    {
+      "scene": "SG01_03",
+      "kind": "dial",
+      "action": "dial"
+    },
+    {
+      "scene": "SG01_04",
+      "kind": "mail",
+      "parent": 388,
+      "action": "read",
+      "id": 388
+    },
+    {
+      "scene": "SG01_04",
+      "kind": "reply",
+      "parent": 388,
+      "action": "ignore",
+      "id": 388
+    },
+    {
+      "scene": "SG01_08",
+      "kind": "mail",
+      "parent": 473,
+      "action": "read",
+      "id": 473
+    },
+    {
+      "scene": "SG01_08",
+      "kind": "reply",
+      "parent": 473,
+      "action": "ignore",
+      "id": 473
+    },
+    {
+      "scene": "SG01_08",
+      "kind": "phone",
+      "action": "call",
+      "id": 1
+    },
+    {
+      "scene": "SG01_09",
+      "kind": "phone",
+      "action": "noCall"
+    },
+    {
+      "scene": "SG01_11",
+      "kind": "mail",
+      "parent": 576,
+      "action": "read",
+      "id": 576
+    },
+    {
+      "scene": "SG01_11",
+      "kind": "reply",
+      "parent": 576,
+      "action": "ignore",
+      "id": 576
+    },
+    {
+      "scene": "SG01_12",
+      "kind": "phone",
+      "action": "call",
+      "id": 3
+    },
+    {
+      "scene": "SG01_12",
+      "kind": "dial",
+      "action": "dial"
+    },
+    {
+      "scene": "SG01_13",
+      "kind": "mailView",
+      "parent": 17,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_01",
+      "kind": "mail",
+      "parent": 401,
+      "action": "read",
+      "id": 401
+    },
+    {
+      "scene": "SG02_01",
+      "kind": "reply",
+      "parent": 401,
+      "action": "ignore",
+      "id": 401
+    },
+    {
+      "scene": "SG02_02",
+      "kind": "mail",
+      "parent": 583,
+      "action": "read",
+      "id": 583
+    },
+    {
+      "scene": "SG02_02",
+      "kind": "reply",
+      "parent": 583,
+      "action": "ignore",
+      "id": 583
+    },
+    {
+      "scene": "SG02_03",
+      "kind": "mail",
+      "parent": 483,
+      "action": "read",
+      "id": 483
+    },
+    {
+      "scene": "SG02_03",
+      "kind": "reply",
+      "parent": 483,
+      "action": "ignore",
+      "id": 483
+    },
+    {
+      "scene": "SG02_05",
+      "kind": "mail",
+      "parent": 527,
+      "action": "read",
+      "id": 527
+    },
+    {
+      "scene": "SG02_05",
+      "kind": "reply",
+      "parent": 527,
+      "action": "ignore",
+      "id": 527
+    },
+    {
+      "scene": "SG02_06",
+      "kind": "mailView",
+      "parent": 49,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_06",
+      "kind": "mailView",
+      "parent": 51,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_08",
+      "kind": "phone",
+      "action": "noCall"
+    },
+    {
+      "scene": "SG02_08",
+      "kind": "mailView",
+      "parent": 52,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_08",
+      "kind": "mailView",
+      "parent": 56,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_08",
+      "kind": "mailView",
+      "parent": 58,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_08",
+      "kind": "mailView",
+      "parent": 59,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_11",
+      "kind": "mailView",
+      "parent": 63,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_11",
+      "kind": "mailView",
+      "parent": 64,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_11",
+      "kind": "mailView",
+      "parent": 65,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_11",
+      "kind": "mailView",
+      "parent": 66,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_11",
+      "kind": "mailView",
+      "parent": 67,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_12",
+      "kind": "phone",
+      "action": "call",
+      "id": 0
+    },
+    {
+      "scene": "SG02_12",
+      "kind": "phone",
+      "action": "call",
+      "id": 1
+    },
+    {
+      "scene": "SG02_18",
+      "kind": "mailView",
+      "parent": 74,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_18",
+      "kind": "mailView",
+      "parent": 70,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG02_18",
+      "kind": "mailView",
+      "parent": 71,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_01",
+      "kind": "mail",
+      "parent": 592,
+      "action": "read",
+      "id": 592
+    },
+    {
+      "scene": "SG03_01",
+      "kind": "reply",
+      "parent": 592,
+      "action": "ignore",
+      "id": 592
+    },
+    {
+      "scene": "SG03_02",
+      "kind": "mail",
+      "parent": 545,
+      "action": "read",
+      "id": 545
+    },
+    {
+      "scene": "SG03_02",
+      "kind": "reply",
+      "parent": 545,
+      "action": "ignore",
+      "id": 545
+    },
+    {
+      "scene": "SG03_02",
+      "kind": "mailView",
+      "parent": 82,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_05",
+      "kind": "mailView",
+      "parent": 115,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_05",
+      "kind": "mail",
+      "parent": 504,
+      "action": "read",
+      "id": 504
+    },
+    {
+      "scene": "SG03_05",
+      "kind": "reply",
+      "parent": 504,
+      "action": "ignore",
+      "id": 504
+    },
+    {
+      "scene": "SG03_08",
+      "kind": "mailView",
+      "parent": 127,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_08",
+      "kind": "mailView",
+      "parent": 125,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_08",
+      "kind": "mailView",
+      "parent": 129,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_08",
+      "kind": "mailView",
+      "parent": 130,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_08",
+      "kind": "mailView",
+      "parent": 132,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_11",
+      "kind": "mailView",
+      "parent": 149,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_12",
+      "kind": "mail",
+      "parent": 592,
+      "action": "read",
+      "id": 592
+    },
+    {
+      "scene": "SG03_12",
+      "kind": "reply",
+      "parent": 592,
+      "action": "ignore",
+      "id": 592
+    },
+    {
+      "scene": "SG03_13",
+      "kind": "phone",
+      "action": "noCall"
+    },
+    {
+      "scene": "SG03_13",
+      "kind": "phone",
+      "action": "noCall"
+    },
+    {
+      "scene": "SG03_13",
+      "kind": "phone",
+      "action": "noCall"
+    },
+    {
+      "scene": "SG03_13",
+      "kind": "phone",
+      "action": "noCall"
+    },
+    {
+      "scene": "SG03_14",
+      "kind": "mailView",
+      "parent": 159,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_14",
+      "kind": "mailView",
+      "parent": 168,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_14",
+      "kind": "mailView",
+      "parent": 175,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_14",
+      "kind": "mailView",
+      "parent": 179,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_14",
+      "kind": "mailView",
+      "parent": 180,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_14",
+      "kind": "mailView",
+      "parent": 184,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_14",
+      "kind": "mailView",
+      "parent": 188,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG03_14",
+      "kind": "mailView",
+      "parent": 189,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_01",
+      "kind": "mail",
+      "parent": 425,
+      "action": "read",
+      "id": 425
+    },
+    {
+      "scene": "SG04_01",
+      "kind": "reply",
+      "parent": 425,
+      "action": "ignore",
+      "id": 425
+    },
+    {
+      "scene": "SG04_01",
+      "kind": "mail",
+      "parent": 518,
+      "action": "read",
+      "id": 518
+    },
+    {
+      "scene": "SG04_01",
+      "kind": "reply",
+      "parent": 518,
+      "action": "ignore",
+      "id": 518
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "mail",
+      "parent": 297,
+      "action": "read",
+      "id": 297
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "reply",
+      "parent": 297,
+      "action": "reply",
+      "id": 299
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "mailView",
+      "parent": 299,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "mail",
+      "parent": 301,
+      "action": "read",
+      "id": 301
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "reply",
+      "parent": 301,
+      "action": "reply",
+      "id": 303
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "mailView",
+      "parent": 303,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "mail",
+      "parent": 304,
+      "action": "read",
+      "id": 304
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "reply",
+      "parent": 304,
+      "action": "reply",
+      "id": 306
+    },
+    {
+      "scene": "SG04_02",
+      "kind": "mailView",
+      "parent": 306,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_03",
+      "kind": "mail",
+      "parent": 550,
+      "action": "read",
+      "id": 550
+    },
+    {
+      "scene": "SG04_03",
+      "kind": "reply",
+      "parent": 550,
+      "action": "ignore",
+      "id": 550
+    },
+    {
+      "scene": "SG04_04",
+      "kind": "mailView",
+      "parent": 191,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_04",
+      "kind": "mailView",
+      "parent": 190,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_04",
+      "kind": "mailView",
+      "parent": 192,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_05",
+      "kind": "mailView",
+      "parent": 194,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_05",
+      "kind": "mailView",
+      "parent": 195,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_05",
+      "kind": "mailView",
+      "parent": 196,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_05",
+      "kind": "mailView",
+      "parent": 197,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_05",
+      "kind": "mailView",
+      "parent": 198,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_05",
+      "kind": "mailView",
+      "parent": 199,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_06",
+      "kind": "mailView",
+      "parent": 201,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_08",
+      "kind": "mail",
+      "parent": 550,
+      "action": "read",
+      "id": 550
+    },
+    {
+      "scene": "SG04_08",
+      "kind": "reply",
+      "parent": 550,
+      "action": "ignore",
+      "id": 550
+    },
+    {
+      "scene": "SG04_09",
+      "kind": "mail",
+      "parent": 614,
+      "action": "read",
+      "id": 614
+    },
+    {
+      "scene": "SG04_09",
+      "kind": "reply",
+      "parent": 614,
+      "action": "ignore",
+      "id": 614
+    },
+    {
+      "scene": "SG04_10",
+      "kind": "mail",
+      "parent": 425,
+      "action": "read",
+      "id": 425
+    },
+    {
+      "scene": "SG04_10",
+      "kind": "reply",
+      "parent": 425,
+      "action": "ignore",
+      "id": 425
+    },
+    {
+      "scene": "SG04_13",
+      "kind": "mail",
+      "parent": 614,
+      "action": "read",
+      "id": 614
+    },
+    {
+      "scene": "SG04_13",
+      "kind": "reply",
+      "parent": 614,
+      "action": "ignore",
+      "id": 614
+    },
+    {
+      "scene": "SG04_13",
+      "kind": "phone",
+      "action": "noCall"
+    },
+    {
+      "scene": "SG04_14",
+      "kind": "mail",
+      "parent": 550,
+      "action": "read",
+      "id": 550
+    },
+    {
+      "scene": "SG04_14",
+      "kind": "reply",
+      "parent": 550,
+      "action": "ignore",
+      "id": 550
+    },
+    {
+      "scene": "SG04_14",
+      "kind": "phone",
+      "action": "call",
+      "id": 2
+    },
+    {
+      "scene": "SG04_15",
+      "kind": "mailView",
+      "parent": 204,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_15",
+      "kind": "mailView",
+      "parent": 205,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_17",
+      "kind": "mail",
+      "parent": 308,
+      "action": "read",
+      "id": 308
+    },
+    {
+      "scene": "SG04_17",
+      "kind": "reply",
+      "parent": 308,
+      "action": "reply",
+      "id": 312
+    },
+    {
+      "scene": "SG04_17",
+      "kind": "mailView",
+      "parent": 312,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_17",
+      "kind": "mail",
+      "parent": 316,
+      "action": "read",
+      "id": 316
+    },
+    {
+      "scene": "SG04_17",
+      "kind": "reply",
+      "parent": 316,
+      "action": "reply",
+      "id": 318
+    },
+    {
+      "scene": "SG04_17",
+      "kind": "mailView",
+      "parent": 318,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_18",
+      "kind": "phone",
+      "action": "call",
+      "id": 7
+    },
+    {
+      "scene": "SG04_19",
+      "kind": "mail",
+      "parent": 324,
+      "action": "read",
+      "id": 324
+    },
+    {
+      "scene": "SG04_19",
+      "kind": "reply",
+      "parent": 324,
+      "action": "reply",
+      "id": 329
+    },
+    {
+      "scene": "SG04_19",
+      "kind": "mailView",
+      "parent": 329,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_20",
+      "kind": "mail",
+      "parent": 518,
+      "action": "read",
+      "id": 518
+    },
+    {
+      "scene": "SG04_20",
+      "kind": "reply",
+      "parent": 518,
+      "action": "ignore",
+      "id": 518
+    },
+    {
+      "scene": "SG04_21",
+      "kind": "mail",
+      "parent": 334,
+      "action": "read",
+      "id": 334
+    },
+    {
+      "scene": "SG04_21",
+      "kind": "reply",
+      "parent": 334,
+      "action": "ignore",
+      "id": 334
+    },
+    {
+      "scene": "SG04_21",
+      "kind": "mailView",
+      "parent": 206,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG04_23",
+      "kind": "mail",
+      "parent": 425,
+      "action": "read",
+      "id": 425
+    },
+    {
+      "scene": "SG04_23",
+      "kind": "reply",
+      "parent": 425,
+      "action": "ignore",
+      "id": 425
+    },
+    {
+      "scene": "SG04_24",
+      "kind": "mail",
+      "parent": 614,
+      "action": "read",
+      "id": 614
+    },
+    {
+      "scene": "SG04_24",
+      "kind": "reply",
+      "parent": 614,
+      "action": "ignore",
+      "id": 614
+    },
+    {
+      "scene": "SG04_25",
+      "kind": "mailView",
+      "parent": 209,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG05_03",
+      "kind": "mail",
+      "parent": 573,
+      "action": "read",
+      "id": 573
+    },
+    {
+      "scene": "SG05_03",
+      "kind": "reply",
+      "parent": 573,
+      "action": "ignore",
+      "id": 573
+    },
+    {
+      "scene": "SG05_06",
+      "kind": "mail",
+      "parent": 335,
+      "action": "read",
+      "id": 335
+    },
+    {
+      "scene": "SG05_06",
+      "kind": "reply",
+      "parent": 335,
+      "action": "reply",
+      "id": 336
+    },
+    {
+      "scene": "SG05_06",
+      "kind": "mailView",
+      "parent": 336,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG05_06",
+      "kind": "mail",
+      "parent": 338,
+      "action": "read",
+      "id": 338
+    },
+    {
+      "scene": "SG05_06",
+      "kind": "reply",
+      "parent": 338,
+      "action": "ignore",
+      "id": 338
+    },
+    {
+      "scene": "SG05_06",
+      "kind": "mail",
+      "parent": 340,
+      "action": "read",
+      "id": 340
+    },
+    {
+      "scene": "SG05_06",
+      "kind": "reply",
+      "parent": 340,
+      "action": "ignore",
+      "id": 340
+    },
+    {
+      "scene": "SG05_07",
+      "kind": "mailView",
+      "parent": 219,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG05_07",
+      "kind": "mailView",
+      "parent": 220,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG05_07",
+      "kind": "mailView",
+      "parent": 221,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG05_07",
+      "kind": "mailView",
+      "parent": 222,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG05_07",
+      "kind": "mailView",
+      "parent": 223,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG05_09",
+      "kind": "mail",
+      "parent": 628,
+      "action": "read",
+      "id": 628
+    },
+    {
+      "scene": "SG05_09",
+      "kind": "reply",
+      "parent": 628,
+      "action": "ignore",
+      "id": 628
+    },
+    {
+      "scene": "SG05_09",
+      "kind": "mailView",
+      "parent": 224,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG05_10",
+      "kind": "mail",
+      "parent": 522,
+      "action": "read",
+      "id": 522
+    },
+    {
+      "scene": "SG05_10",
+      "kind": "reply",
+      "parent": 522,
+      "action": "ignore",
+      "id": 522
+    },
+    {
+      "scene": "SG06_02",
+      "kind": "phone",
+      "action": "call",
+      "id": 0
+    },
+    {
+      "scene": "SG06_08",
+      "kind": "phone",
+      "action": "call",
+      "id": 0
+    },
+    {
+      "scene": "SG06_15",
+      "kind": "phone",
+      "action": "call",
+      "id": 8
+    },
+    {
+      "scene": "SG06_18",
+      "kind": "phone",
+      "action": "call",
+      "id": 0
+    },
+    {
+      "scene": "SG06_22",
+      "kind": "mailView",
+      "parent": 229,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG06_23",
+      "kind": "dmail",
+      "action": "send"
+    },
+    {
+      "scene": "SG07_02",
+      "kind": "mail",
+      "parent": 341,
+      "action": "read",
+      "id": 341
+    },
+    {
+      "scene": "SG07_02",
+      "kind": "reply",
+      "parent": 341,
+      "action": "reply",
+      "id": 342
+    },
+    {
+      "scene": "SG07_02",
+      "kind": "mailView",
+      "parent": 342,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG07_03",
+      "kind": "mail",
+      "parent": 344,
+      "action": "read",
+      "id": 344
+    },
+    {
+      "scene": "SG07_03",
+      "kind": "reply",
+      "parent": 344,
+      "action": "reply",
+      "id": 346
+    },
+    {
+      "scene": "SG07_03",
+      "kind": "mailView",
+      "parent": 346,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG07_06",
+      "kind": "phone",
+      "action": "call",
+      "id": 9
+    },
+    {
+      "scene": "SG07_06",
+      "kind": "phone",
+      "action": "call",
+      "id": 1
+    },
+    {
+      "scene": "SG07_06",
+      "kind": "phone",
+      "action": "call",
+      "id": 9
+    },
+    {
+      "scene": "SG07_08",
+      "kind": "mail",
+      "parent": 354,
+      "action": "read",
+      "id": 354
+    },
+    {
+      "scene": "SG07_08",
+      "kind": "reply",
+      "parent": 354,
+      "action": "reply",
+      "id": 362
+    },
+    {
+      "scene": "SG07_08",
+      "kind": "mailView",
+      "parent": 362,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG07_09",
+      "kind": "mail",
+      "parent": 371,
+      "action": "read",
+      "id": 371
+    },
+    {
+      "scene": "SG07_09",
+      "kind": "reply",
+      "parent": 371,
+      "action": "ignore",
+      "id": 371
+    },
+    {
+      "scene": "SG07_13",
+      "kind": "dmail",
+      "action": "send"
+    },
+    {
+      "scene": "SG08_01",
+      "kind": "mail",
+      "parent": 377,
+      "action": "read",
+      "id": 377
+    },
+    {
+      "scene": "SG08_01",
+      "kind": "reply",
+      "parent": 377,
+      "action": "reply",
+      "id": 378
+    },
+    {
+      "scene": "SG08_01",
+      "kind": "mailView",
+      "parent": 378,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG08_02",
+      "kind": "mail",
+      "parent": 379,
+      "action": "read",
+      "id": 379
+    },
+    {
+      "scene": "SG08_02",
+      "kind": "reply",
+      "parent": 379,
+      "action": "ignore",
+      "id": 379
+    },
+    {
+      "scene": "SG08_03",
+      "kind": "phone",
+      "action": "call",
+      "id": 3
+    },
+    {
+      "scene": "SG08_06",
+      "kind": "mailView",
+      "parent": 255,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG08_06",
+      "kind": "mailView",
+      "parent": 254,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG08_09",
+      "kind": "mail",
+      "parent": 380,
+      "action": "read",
+      "id": 380
+    },
+    {
+      "scene": "SG08_09",
+      "kind": "reply",
+      "parent": 380,
+      "action": "ignore",
+      "id": 380
+    },
+    {
+      "scene": "SG08_12",
+      "kind": "phone",
+      "action": "call",
+      "id": 3
+    },
+    {
+      "scene": "SG09_03",
+      "kind": "phone",
+      "action": "call",
+      "id": 3
+    },
+    {
+      "scene": "SG09_06",
+      "kind": "mail",
+      "parent": 381,
+      "action": "read",
+      "id": 381
+    },
+    {
+      "scene": "SG09_06",
+      "kind": "reply",
+      "parent": 381,
+      "action": "reply",
+      "id": 383
+    },
+    {
+      "scene": "SG09_06",
+      "kind": "mailView",
+      "parent": 383,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG09_07",
+      "kind": "mailView",
+      "parent": 277,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG09_07",
+      "kind": "mail",
+      "parent": 385,
+      "action": "read",
+      "id": 385
+    },
+    {
+      "scene": "SG09_07",
+      "kind": "reply",
+      "parent": 385,
+      "action": "ignore",
+      "id": 385
+    },
+    {
+      "scene": "SG09_10",
+      "kind": "dmail",
+      "action": "send"
+    },
+    {
+      "scene": "SG09_10",
+      "kind": "mailView",
+      "parent": 280,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG09_10",
+      "kind": "mailView",
+      "parent": 281,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG09_10",
+      "kind": "mailView",
+      "parent": 282,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG10_02",
+      "kind": "mail",
+      "parent": 386,
+      "action": "read",
+      "id": 386
+    },
+    {
+      "scene": "SG10_02",
+      "kind": "reply",
+      "parent": 386,
+      "action": "reply",
+      "id": 387
+    },
+    {
+      "scene": "SG10_02",
+      "kind": "mailView",
+      "parent": 387,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG10_02",
+      "kind": "mailView",
+      "parent": 290,
+      "action": "ignore"
+    },
+    {
+      "scene": "SG11_04",
+      "kind": "mailView",
+      "parent": 295,
+      "action": "ignore"
+    }
+  ]
+}

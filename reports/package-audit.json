@@ -1,0 +1,23 @@
+{
+  "file": "com.codex.steins.rw5.debug.0.1.4.rpk",
+  "version": "0.1.4",
+  "bytes": 22754673,
+  "expandedBytes": 27852208,
+  "entries": 2806,
+  "sha256": "8d41ba601724bfd3490a1ae216b804ecb31cd38c25223cf92ba9dff72a1690ac",
+  "certificateSha256": "4e8e1ee24968b0dad6d0956a7e14d848b38b22a203f39c389a45d8737bdc4585",
+  "zipCRCValid": true,
+  "outerSignatureValid": true,
+  "innerSignatureValid": true,
+  "allFileDigestsValid": true,
+  "signedFiles": 2616,
+  "maximumPackageBytes": 25000000,
+  "compatibilityTailRemainder": 1,
+  "commonFilesMatchSource": true,
+  "decodedImages": 1444,
+  "fontCoverageStrings": 272183,
+  "circularRGBAIcon": true,
+  "galleryGroups": 77,
+  "galleryImages": 133,
+  "physicalDeviceTested": false
+}

@@ -1,0 +1,12 @@
+{
+  "name": "steins-rw5",
+  "version": "0.1.4",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "node tools/build.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "preview": "node tools/emulator-server.cjs",
+    "routes": "node tools/verify-routes.cjs"
+  }
+}

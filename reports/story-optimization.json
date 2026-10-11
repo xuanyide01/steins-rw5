@@ -1,0 +1,75 @@
+{
+  "result": "passed",
+  "referenceSHA256": "344d5a68d8de097fabd6b7b2134c4e5cd92d17eb837abae4411341b8d32b16bb",
+  "logicalPositions": 116926,
+  "batches": 7125,
+  "batchedAssignments": 23770,
+  "deadConstantWrites": 449,
+  "constantExpressions": 639,
+  "phoneInstructionsRemoved": 0,
+  "logicalPCsUnchanged": true,
+  "branchesAndLabelsRetained": true,
+  "differentialRoutes": [
+    {
+      "route": "suzuha",
+      "visibleFramesCompared": 17747,
+      "choicesCompared": 101,
+      "completeStateEqual": true,
+      "ending": "阿万音铃羽",
+      "originalDispatches": 3540897,
+      "optimizedDispatches": 2277404,
+      "reductionPercent": 35.68
+    },
+    {
+      "route": "faris",
+      "visibleFramesCompared": 19876,
+      "choicesCompared": 107,
+      "completeStateEqual": true,
+      "ending": "菲利斯",
+      "originalDispatches": 3954609,
+      "optimizedDispatches": 2552758,
+      "reductionPercent": 35.45
+    },
+    {
+      "route": "luka",
+      "visibleFramesCompared": 21680,
+      "choicesCompared": 114,
+      "completeStateEqual": true,
+      "ending": "漆原琉华",
+      "originalDispatches": 4295730,
+      "optimizedDispatches": 2767760,
+      "reductionPercent": 35.57
+    },
+    {
+      "route": "mayuri",
+      "visibleFramesCompared": 25075,
+      "choicesCompared": 123,
+      "completeStateEqual": true,
+      "ending": "椎名真由理",
+      "originalDispatches": 4837175,
+      "optimizedDispatches": 3118930,
+      "reductionPercent": 35.52
+    },
+    {
+      "route": "kurisu",
+      "visibleFramesCompared": 25432,
+      "choicesCompared": 191,
+      "completeStateEqual": true,
+      "ending": "牧濑红莉栖",
+      "originalDispatches": 4851463,
+      "optimizedDispatches": 3124549,
+      "reductionPercent": 35.6
+    },
+    {
+      "route": "true",
+      "visibleFramesCompared": 27740,
+      "choicesCompared": 193,
+      "completeStateEqual": true,
+      "ending": "真结局",
+      "originalDispatches": 5244022,
+      "optimizedDispatches": 3376410,
+      "reductionPercent": 35.61
+    }
+  ],
+  "scope": "Full registers, stack, loops, switches, date, graphics, mail, contacts and visible text/choice match at every frame on six selected ending paths; not exhaustive over every optional reply combination."
+}

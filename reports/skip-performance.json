@@ -1,0 +1,117 @@
+{
+  "version": "0.1.4",
+  "sha256": "8d41ba601724bfd3490a1ae216b804ecb31cd38c25223cf92ba9dff72a1690ac",
+  "runtime": "Official Vela watch 5.0 emulator, 432x514, RAM128MB",
+  "samples": [
+    {
+      "start": [
+        7,
+        970
+      ],
+      "stop": [
+        12,
+        1222
+      ],
+      "type": "choice",
+      "seconds": 59.549
+    },
+    {
+      "start": [
+        7,
+        970
+      ],
+      "stop": [
+        12,
+        1222
+      ],
+      "type": "choice",
+      "seconds": 58.929
+    },
+    {
+      "start": [
+        7,
+        4051
+      ],
+      "stop": [
+        13,
+        23
+      ],
+      "type": "frame",
+      "seconds": 37.129
+    },
+    {
+      "start": [
+        7,
+        4339
+      ],
+      "stop": [
+        15,
+        245
+      ],
+      "type": "choice",
+      "seconds": 51.373
+    },
+    {
+      "start": [
+        15,
+        245
+      ],
+      "stop": [
+        15,
+        245
+      ],
+      "type": "frame",
+      "seconds": 1.869
+    },
+    {
+      "start": [
+        8,
+        706
+      ],
+      "stop": [
+        15,
+        315
+      ],
+      "type": "choice",
+      "seconds": 2.155
+    },
+    {
+      "start": [
+        7,
+        973
+      ],
+      "stop": [
+        8,
+        412
+      ],
+      "type": "choice",
+      "seconds": 19.25
+    },
+    {
+      "start": [
+        8,
+        401
+      ],
+      "stop": [
+        8,
+        412
+      ],
+      "type": "choice",
+      "seconds": 146.657
+    },
+    {
+      "start": [
+        7,
+        3262
+      ],
+      "stop": [
+        62,
+        99
+      ],
+      "type": "choice",
+      "seconds": 149.853
+    }
+  ],
+  "method": "Current boot log timestamps from safe chapter skip to following frame or choice; practical observations, not a controlled benchmark. Cache state, cursor and host load vary. Does not measure physical firmware.",
+  "physicalDeviceTested": false
+}
