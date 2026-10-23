@@ -15,7 +15,7 @@ const manager = new VvdManager({ sdkHome: process.env.WATCH_SDK_HOME||path.join(
     dl.on('progress', p => { if (Date.now() - last > 12000) { last = Date.now(); console.log('SDK', p.formattedPercentage, p.formatTotal, p.formattedSpeed); }});
     await dl.downlodPromise;
   }
-  const name = 'SteinsRW5-432x514';
+  const name = 'SteinsRebuildRW5-432x514';
   if (!manager.getVvdList().some(x => x.name === name || x.vvdName === name)) {
     manager.createVvd({ name, arch: IVvdArchType.arm, width: '432', height: '514', density: '320',
       shape: 'rect', flavor: 'watch', customLcdRadius: '20', imageType: VelaImageType.VELA_WATCH_5,

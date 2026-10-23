@@ -1,32 +1,46 @@
 <template>
   <div class="page" onswipe="swipe">
+    <div if="{{mode === 'opening'}}" class="opening-page" onclick="skipOpening"><div class="opening-viewport"><image class="opening-sheet" style="left:{{openingLeft}}px;top:{{openingTop}}px;" src="{{openingSrc}}" oncomplete="openingLoaded" onerror="openingError"></image></div></div>
     <div if="{{mode === 'title' || mode === 'play'}}" class="art" onclick="advance">
       <image if="{{mode === 'title'}}" class="background" src="/common/title_bg.png" onerror="backgroundError" oncomplete="backgroundLoaded"></image>
+      <div if="{{mode === 'title' && titleAnimationEnabled && !titleMediaBusy}}" class="title-machine-viewport"><image class="title-machine-sheet" style="left:{{titleMachineLeft}}px;" src="{{titleMachineSrc}}" onerror="titleAnimationError"></image></div>
       <div if="{{mode === 'play'}}" class="scene-viewport"><image for="{{sceneImages}}" tid="key" class="scene-layer" style="width: {{$item.width}}px; height: {{$item.height}}px; top: {{$item.top}}px; left: {{$item.left}}px; opacity: {{$item.opacity}};" src="{{$item.src}}" onerror="backgroundError"></image></div>
     </div>
+    <div if="{{mode === 'chaptercard'}}" class="chapter-card" onclick="continueChapter"><image class="chapter-card-image" src="{{chapterCardSrc}}" oncomplete="chapterCardLoaded" onerror="chapterCardError"></image></div>
     <div if="{{mode === 'title'}}" class="title-panel">
-      <text class="title-text">命运石之门</text>
-      <text class="title-subtitle">{{progressLabel}}</text>
-      <text class="title-action" onclick="startNew">开始游戏</text>
-      <text class="title-action secondary" onclick="continueGame">读取存档</text>
-      <text class="title-action secondary" onclick="openGallery">CG 鉴赏</text>
-      <text class="title-action secondary" onclick="openRoutes">选择章节</text>
+      <div class="title-instrument"><div class="instrument-ring outer-ring"></div><div class="instrument-ring middle-ring"></div><div class="instrument-ring inner-ring"></div><div class="instrument-axis axis-x"></div><div class="instrument-axis axis-y"></div><text class="instrument-code">{{titleWorldline}}</text><text class="instrument-caption">DIVERGENCE</text><div class="instrument-rule"></div><text class="instrument-motto">El Psy Kongroo</text></div>
+      <div class="title-entry"><image class="original-button" src="/common/ui/start.png" onclick="startNew"></image></div>
+      <div class="title-entry"><image class="original-button" src="/common/ui/load.png" onclick="continueGame"></image></div>
+      <div class="title-entry"><image class="original-button" src="/common/ui/extra.png" onclick="openExtra"></image></div>
+      <div class="title-entry"><image class="original-button" src="/common/ui/config.png" onclick="openConfig"></image></div>
     </div>
+    <div if="{{mode === 'extra'}}" class="overlay"><text class="menu-title">EXTRA / 扩展</text><text class="menu-action" onclick="openGallery">CG LIBRARY / CG 鉴赏</text><text class="menu-action" onclick="openRoutes">CHAPTER / 选择章节</text><text class="menu-action" onclick="watchOpening">OP MOVIE / 观看 OP</text><text class="menu-action" onclick="toTitle">RETURN / 返回标题</text></div>
+    <div if="{{mode === 'config'}}" class="overlay"><text class="menu-title">CONFIG / 设置</text><text class="menu-action" onclick="toggleSpeed">{{speedLabel}}</text><text class="menu-action" onclick="toggleFont">{{fontLabel}}</text><text class="menu-action" onclick="toggleAutoSpeed">{{autoSpeedLabel}}</text><text class="menu-action" onclick="toggleSound">{{soundLabel}}</text><text class="menu-action" onclick="toggleTitleAnimation">{{titleAnimationLabel}}</text><text class="menu-action" onclick="toTitle">RETURN / 返回标题</text></div>
+    <div if="{{mode === 'help'}}" class="overlay"><text class="menu-title">HELP / 操作</text><text class="help-text">轻触正文：显示整句或下一句。
+上滑正文：阅读长文本。
+菜单：存读档、跳章及自动播放。
+自动播放遇选项暂停，选择后继续。
+查看手机和滚动正文时暂停。
+滚动后轻触正文可继续。
+回信发送后显示原文，关闭后继续。
+下一章会停在关键选项。</text><text class="menu-action" onclick="toTitle">RETURN / 返回标题</text></div>
     <div if="{{mode === 'play'}}" class="dialogue-panel">
       <div class="speaker-row"><text class="speaker" style="font-family: {{speakerFont}};">{{speaker}}</text><text class="chapter" style="font-family: {{chapterFont}};">{{chapterLabel}}</text></div>
-      <scroll id="dialogue-scroll" class="dialogue-scroll" scroll-y="true" onclick="dialogueTap" ontouchstart="dialogueTouchStart" ontouchmove="dialogueTouchMove" ontouchend="dialogueTouchMove" onscroll="dialogueScrolled"><text class="dialogue" style="height: {{dialogueHeight}}px;font-size: {{fontSize}}px;font-family: {{dialogueFont}};">{{displayText}}</text></scroll>
-      <div class="toolbar"><text class="tool" onclick="goBack">上一句</text><text class="tool" onclick="showMenu">菜单</text><text class="tool" onclick="showPhone">手机</text><text class="tool" onclick="advance">下一句 ›</text></div>
+      <scroll id="dialogue-scroll" class="dialogue-scroll" scroll-y="true" onclick="dialogueTap" ontouchstart="dialogueTouchStart" ontouchmove="dialogueTouchMove" ontouchend="dialogueTouchEnd" onscroll="dialogueScrolled"><div class="dialogue-content" style="height: {{dialogueHeight}}px;"><text for="{{dialogueLines}}" tid="id" class="dialogue-line" style="font-size: {{fontSize}}px;font-family: {{dialogueFont}};">{{$item.text}}</text></div></scroll>
+      <div class="toolbar"><text class="tool" onclick="goBack">上一句</text><text class="tool" onclick="showMenu">{{autoEnabled ? 'AUTO' : '菜单'}}</text><text class="tool" style="font-size:16px;color:{{phoneNoticeColor}};" onclick="showPhone">{{phoneLabel}}</text><text class="tool" onclick="advance">下一句 ›</text></div>
     </div>
     <div if="{{mode === 'choice'}}" class="choice-panel full-choice">
-      <scroll id="mail-scroll" class="choice-heading" style="height: {{choiceViewport}}px;" scroll-y="true"><div class="mail-content" style="height: {{choiceHeadingHeight}}px;"><text if="{{choiceTag !== ''}}" class="choice-tag">{{choiceTag}}</text><text class="choice-title" style="height: {{choiceTextHeight}}px;font-family: {{choiceHeadingFont}};">{{choiceHeading}}</text></div></scroll>
+      <scroll id="mail-scroll" class="choice-heading" style="height: {{choiceViewport}}px;" scroll-y="true"><div class="mail-content" style="height: {{choiceHeadingHeight}}px;"><text if="{{choiceTag !== ''}}" class="choice-tag">{{choiceTag}}</text><div class="mail-lines"><text for="{{choiceLines}}" tid="id" class="mail-line" style="font-family: {{choiceHeadingFont}};">{{$item.text}}</text></div></div></scroll>
       <scroll class="choice-list" style="height: {{choiceListHeight}}px;" scroll-y="true"><div for="{{options}}" tid="key" class="choice" onclick="pick($idx)"><text if="{{$item.label}}" class="choice-role">{{$item.label}}</text><text class="choice-content" style="font-family: {{$item.font}};">{{$item.text}}</text></div></scroll>
-      <text class="small-action" onclick="showMenu">菜单</text>
+      <div class="choice-footer"><text class="small-action" onclick="showPhone">手机</text><text class="small-action" onclick="showMenu">菜单</text></div>
     </div>
     <div if="{{mode === 'menu'}}" class="overlay">
-      <text class="menu-title">阅读菜单</text>
+      <text class="menu-title">SYSTEM / 阅读菜单</text>
       <text class="menu-action" onclick="saveGame">保存进度</text>
       <text class="menu-action" onclick="loadGame">读取进度</text>
-      <text class="menu-action" style="color: {{hasNextChapter ? '#d5e5f2' : '#64758a'}};" onclick="goNextChapter">下一章 ›</text>
+      <text class="menu-action" style="color: {{hasNextChapter ? '#e3e1cf' : '#64758a'}};" onclick="goNextChapter">下一章 ›</text>
+      <text class="menu-action" onclick="toggleAuto">{{autoLabel}}</text>
+      <text class="menu-action" onclick="toggleAutoSpeed">{{autoSpeedLabel}}</text>
       <text class="menu-action" onclick="toggleSpeed">{{speedLabel}}</text>
       <text class="menu-action" onclick="toggleFont">{{fontLabel}}</text>
       <text class="menu-action" onclick="resume">返回游戏</text>
@@ -41,7 +55,7 @@
       <text class="panel-title">{{slotTitle}}</text>
       <text class="panel-subtitle">{{slotPageLabel}}</text>
       <div class="slot-list">
-        <div for="{{slotRows}}" tid="number" class="slot-card" style="background-color: {{$item.occupied ? '#1d3549' : '#142535'}};" onclick="selectSlot($item.index)">
+        <div for="{{slotRows}}" tid="number" class="slot-card" style="background-color: {{$item.occupied ? '#282921' : '#191a17'}};" onclick="selectSlot($item.index)">
           <text class="slot-title">{{$item.title}}</text><text class="slot-meta" style="font-family: {{$item.metaFont}};">{{$item.meta}}</text><text class="slot-preview" style="font-family: {{$item.previewFont}};">{{$item.preview}}</text>
         </div>
       </div>
@@ -62,50 +76,98 @@
       <image class="cg-image" src="{{cgSrc}}" onclick="cycleCg"></image><text class="cg-caption" style="font-family: {{cgFont}};">{{cgLabel}}</text>
       <div class="cg-controls"><text class="pager-action" onclick="previousCg">‹ 上一组</text><text class="pager-action" onclick="backToGallery">返回列表</text><text class="pager-action" onclick="nextCg">下一组 ›</text></div>
     </div>
+    <div if="{{mode === 'phone'}}" class="full-panel phone-panel">
+      <text class="panel-title">PHONE / {{phoneTitle}}</text><text class="panel-subtitle">{{phoneOwner}} · {{phonePageLabel}}</text>
+      <scroll id="phone-scroll" class="phone-body" scroll-y="true"><div class="phone-content" style="height: {{phoneContentHeight}}px;">
+        <div for="{{phoneRows}}" tid="key" class="phone-card" onclick="phonePick($idx)"><text class="phone-card-title" style="font-family: {{$item.font}};">{{$item.text}}</text><text class="phone-card-meta" style="font-family: {{$item.metaFont}};">{{$item.meta}}</text></div>
+        <text for="{{phoneLines}}" tid="id" class="mail-line" style="font-family: {{$item.font}};">{{$item.text}}</text>
+      </div></scroll>
+      <div class="pager"><text class="pager-action" onclick="phoneReplyOrPrevious">{{phoneReplyLabel}}</text><text class="pager-action" onclick="phoneBack">{{phoneBackLabel}}</text><text class="pager-action" onclick="phoneNext">下页 ›</text></div>
+    </div>
     <div if="{{mode === 'end'}}" class="end-panel"><text class="game-title">{{endingLabel}}</text><text class="subtitle">故事阅读完毕</text><text class="action" onclick="toTitle">返回标题</text></div>
     <div if="{{mode === 'error'}}" class="overlay"><text class="menu-title">暂时无法继续</text><text class="error-text">{{errorText}}</text><text class="action" onclick="toTitle">返回标题</text></div>
     <text if="{{loading}}" class="loading">加载中…</text>
   </div>
 </template>
 <script>
+import {setMobileEvents,mobileEventPath,ensureMobile,pendingMail,markMailRead,canReply,sendOptional,mailPath,answerDeferred,currentCall,takeCall,plotPresentation,finishPresentation,keyPhoneChoice,keyPhoneActions,markOrdinaryInboxRead} from '../../common/mobile.js';
+import {autoDelay,makeAutoClock} from '../../common/autoplay.js';
+import {phoneContext,messageInfo,outgoingId,contactInfo,phoneMessages} from '../../common/phone.js';
 import file from '@system.file';
 import storage from '@system.storage';
 import prompt from '@system.prompt';
-import {configure,provideMailText,provideChannelText,newState,newChapterState,restore,readFrame,readChapterSkip,next,nextChapter,choose,previous,previewMap,openPhone,storyDate,recoverGraphics} from '../../common/engine.js';
+import audio from '@system.audio';
+import {makeTitleMusic} from '../../common/title-music.js';
+import {makeTitleAnimation} from '../../common/title-animation.js';
+import {worldlineFor,titleRate} from '../../common/worldline.js';
+import {INITIAL_WORLDLINE} from '../../common/worldline-data.js';
+import {configure,newState,newChapterState,restore,readFrame,locate,next,nextChapter,choose,previous,storyDate} from '../../common/engine.js';
 import {SLOT_COUNT,LEGACY_KEY,slotKey,decodeSave,decodeSlotMeta,createSave,slotRow} from '../../common/saves.js';
 import {catalog} from '../../common/catalog.js';
 import {imagePath,galleryImagePath} from '../../common/assets.js';
 import {groupGallery,stepVariant} from '../../common/gallery.js';
 import {textFont,cleanText,dialogueText,wrapText} from '../../common/text-font.js';
-import {portraitBox} from '../../common/portrait-layout.js';
-import {PROGRESS_KEY,emptyProgress,decodeProgress,progressFromState,withProgress,initializeProgress} from '../../common/progress.js';
+import {PROGRESS_KEY,emptyProgress,decodeProgress,progressFromState,titleProgress,withProgress} from '../../common/progress.js';
+import {wantsOpening,makeOpeningClock} from '../../common/opening.js';
+import {takeChapterCard,CHAPTER_CARD_HOLD_MS} from '../../common/chapter-cards.js';
 export default {
-  private:{mode:'title',sceneImages:[],backgroundSrc:'/common/title_bg.png',bodySrc:'',bodySecond:'',bodyThird:'',portraitWidth:200,portraitLeft:116,portraitSecondLeft:216,speaker:'',displayText:'',chapterLabel:'',speakerFont:'sans-serif',dialogueFont:'sans-serif',chapterFont:'sans-serif',browseFont:'sans-serif',overwriteFont:'sans-serif',cgFont:'sans-serif',
-    choiceHeading:'选择下一步',choiceHeadingFont:'sans-serif',choiceTag:'',choiceTextHeight:56,choiceHeadingHeight:100,choiceViewport:134,choiceListHeight:296,dialogueHeight:128,options:[],loading:false,errorText:'',hasNextChapter:true,fontSize:24,textSpeed:30,speedLabel:'显示速度：逐字',fontLabel:'字号：标准',progressLabel:'红米手表 5 · 图文版',
+  private:{titleMediaBusy:false,openingSrc:'/common/opening/000.jpg',openingLeft:0,openingTop:0,titleMachineLeft:0,titleMachineSrc:'/common/title-machine/atlas00.png',titleAnimationEnabled:true,titleAnimationLabel:'标题动画：开启',phoneLabel:'手机',phoneNoticeColor:'#d8cba8',phoneReplyLabel:'‹ 上页',autoEnabled:false,autoSpeed:1,autoLabel:'自动播放：关闭',autoSpeedLabel:'自动速度：标准',phoneTitle:'手机',phoneOwner:'',phonePageLabel:'',phoneBackLabel:'返回剧情',phoneRows:[],phoneLines:[],phoneFont:'sans-serif',phoneContentHeight:340,mode:'title',sceneImages:[],backgroundSrc:'/common/title_bg.png',bodySrc:'',bodySecond:'',bodyThird:'',portraitWidth:200,portraitLeft:116,portraitSecondLeft:216,speaker:'',displayText:'',chapterLabel:'',speakerFont:'sans-serif',dialogueFont:'sans-serif',chapterFont:'sans-serif',browseFont:'sans-serif',overwriteFont:'sans-serif',cgFont:'sans-serif',
+    titleWorldline:'1.130426',soundEnabled:true,soundLabel:'游戏音量：开启',musicAvailable:true,chapterCardSrc:'',choiceLines:[],dialogueLines:[],choiceHeading:'选择下一步',choiceHeadingFont:'sans-serif',choiceTag:'',choiceTextHeight:56,choiceHeadingHeight:100,choiceViewport:134,choiceListHeight:296,dialogueHeight:128,options:[],loading:false,errorText:'',hasNextChapter:true,fontSize:24,textSpeed:30,speedLabel:'显示速度：逐字',fontLabel:'字号：标准',progressLabel:'红米手表 5 · 图文版',
     portraitHeight:286,portraitTop:0,portraitSecondWidth:200,portraitSecondHeight:286,portraitSecondTop:0,portraitThirdWidth:144,portraitThirdHeight:286,portraitThirdTop:0,portraitThirdLeft:288,
     slotTitle:'',slotPage:0,slotPageLabel:'',slotRows:[],storageBusy:false,overwriteTitle:'',overwriteDetail:'',endingLabel:'本篇阅读完毕',
     galleryPage:0,galleryPageLabel:'',galleryTop:[],galleryBottom:[],cgIndex:0,cgVariant:0,cgSrc:'',cgLabel:'',browseRows:[],browseTitle:'',browseLabel:'',browsePage:0},
   onInit(){
-    this.session=newState();this.cachedChapter=0;this.ops=[];this._blockCache={};this._blockOrder=[];this.loadSequence=0;this.timer=null;this.fullText='';this.resumeMode='play';
+    this._openingReturn='story';this._openingReady=false;this._openingLoadTimer=null;this._openingPlayer=makeOpeningClock(setTimeout,clearTimeout,()=>Date.now(),(src,left,top)=>this.paintOpening(src,left,top),()=>this.finishOpening('ended'));
+    this.titleMachineLeft=0;this.titleMachineSrc='/common/title-machine/atlas00.png';this.titleAnimationEnabled=true;this.titleAnimationLabel='标题动画：开启';this._titleAnimator=makeTitleAnimation(setTimeout,clearTimeout,()=>this.mode==='title'&&!this.titleMediaBusy&&this._settingsReady&&this._progressReady&&this.titleAnimationEnabled&&!this._hidden,(src,left)=>{if(this.titleMachineSrc!==src)this.titleMachineSrc=src;this.titleMachineLeft=left;});
+    this._settingsReady=false;this._music=makeTitleMusic(audio,(available,busy)=>{this.titleMediaBusy=!!busy;if(this._titleAnimator)this._titleAnimator.update();this.musicAvailable=available;this.refreshSettings();console.log('STEINS2_RW5 title music',available?'requested':'unavailable');});
+    this._auto=makeAutoClock(setTimeout,clearTimeout);this._autoScrollPaused=false;this.session=newState();this.cachedChapter=0;this.ops=[];this._blockCache={};this._blockOrder=[];this.loadSequence=0;this.timer=null;this.fullText='';this.resumeMode='play';
     this._slotsSequence=0;this._gallerySequence=0;this._slotData=[];this._galleryCatalog=[];this._galleryTotal=0;this._slotsReturnMode='title';this._slotRole='load';
     this._progress=emptyProgress();this._progressWriteBusy=false;this._progressDirty=false;this._progressReady=false;this.loading=true;
-    storage.get({complete:()=>{},key:'steins_rw5_settings_v1',success:data=>{try{const s=JSON.parse(data);this.fontSize=s.fontSize===28?28:24;this.textSpeed=s.textSpeed===0?0:30;this.refreshSettings();}catch(e){}},fail:()=>{}});
+    storage.get({complete:()=>{},key:'steins2_rw5_settings_v1',success:data=>{try{const s=JSON.parse(data);this.fontSize=s.fontSize===28?28:24;this.textSpeed=s.textSpeed===0?0:30;this.autoSpeed=[0,1,2].indexOf(s.autoSpeed)>=0?s.autoSpeed:1;this.soundEnabled=s.soundEnabled!==false;this.titleAnimationEnabled=s.titleAnimationEnabled!==false;}catch(e){}this._settingsReady=true;this.refreshSettings();this.syncTitleMusic();},fail:()=>{this._settingsReady=true;this.refreshSettings();this.syncTitleMusic();}});
     this.readRuntime();
-    console.log('STEINS_RW5 title ready');
+    console.log('STEINS2_RW5 title ready');
   },
-  backgroundLoaded(){console.log('STEINS_RW5 background loaded',this.mode,this.backgroundSrc);},
-  backgroundError(){console.log('STEINS_RW5 background failed',this.mode,this.backgroundSrc);},
-  clearTyping(){if(this.timer!==null){clearTimeout(this.timer);this.timer=null;}},
-  onShow(){this._hidden=false;if(this._renderPending&&this.timer===null)this.renderFrame();},
-    onHide(){this._hidden=true;this.clearTyping();if(!this.loading&&this.mode==='play')this.displayText=this.fullText;},
-  onDestroy(){this.clearTyping();this.loadSequence++;this._slotsSequence++;this._gallerySequence++;},
-  readRuntime(){const files=['memory','mail-index','runtime-assets','channel-index'];const loaded={};const load=i=>{file.readText({uri:'/common/'+files[i]+'.txt',complete:()=>{},success:data=>{try{loaded[files[i]]=JSON.parse(data.text);if(i+1<files.length){setTimeout(()=>load(i+1),0);return;}configure(loaded.memory,loaded['mail-index'],loaded['runtime-assets'],loaded['channel-index']);this.readProgress();}catch(e){this.fail(e.message);}},fail:()=>this.fail('资源初始化失败')});};load(0);},
+  openExtra(){if(!this.loading){this.clearTyping();this.mode='extra';}},
+  openConfig(){if(!this.loading){this.clearTyping();this.refreshSettings();this.mode='config';}},
+  openHelp(){if(!this.loading){this.clearTyping();this.mode='help';}},
+  armAuto(){if(!this._auto)return;this._auto.cancel();if(!this.autoEnabled||this.mode!=='play'||this.loading||this._hidden||this._autoScrollPaused||this.timer!==null||this.displayText!==this.fullText)return;const at=this.session.chapter+':'+this.session.cursor;this._auto.arm(autoDelay(this.fullText.replace(/\n/g,'').length,this.autoSpeed),()=>this.autoEnabled&&this.mode==='play'&&!this.loading&&!this._hidden&&!this._autoScrollPaused&&this.timer===null&&this.session.chapter+':'+this.session.cursor===at,()=>this.advance());},
+  toggleAuto(){this.autoEnabled=!this.autoEnabled;this._autoScrollPaused=false;this._auto.cancel();this.refreshSettings();},
+  toggleAutoSpeed(){this.autoSpeed=(this.autoSpeed+1)%3;this.refreshSettings();this.persistSettings();},
+  dialogueTouchEnd(event){this.dialogueTouchMove(event);if(!this._dialogueMoved)this.armAuto();},
+  phoneHome(){this._phoneSection='home';this._phonePage=0;this.renderPhone();},
+  renderPhone(){this.clearTyping();const context=phoneContext(this.session);this._phoneContext=context;this.phoneOwner=context.name+'的手机';this.phoneLines=[];this.phoneFont='sans-serif';const section=this._phoneSection;this.phoneReplyLabel='‹ 上页';let items=[];
+    if(section==='home'){this.phoneTitle='手机';items=[{text:'收信箱',meta:phoneMessages(this.session,false,context.owner).length+' 封邮件',section:'inbox'},{text:'已发送',meta:phoneMessages(this.session,true,context.owner).length+' 封邮件',section:'sent'},{text:'联系人',meta:context.contacts.length+' 位联系人',section:'contacts'}];if(keyPhoneActions(this.session).length||currentCall(this.session))items.push({text:'当前电话／发信',meta:'本段可操作',section:'calls'});}
+    if(section==='inbox'||section==='sent'){this.phoneTitle=section==='sent'?'已发送':'收信箱';items=phoneMessages(this.session,section==='sent',context.owner).map(id=>{const m=messageInfo(id);return {id,text:m.sender,meta:m.title};});if(!items.length)items=[{text:section==='sent'?'暂无已发送邮件':'暂无收到的邮件',meta:'继续剧情后更新',empty:true}];}
+    if(section==='calls'){this.phoneTitle='电话／发信';const key=keyPhoneActions(this.session),c=currentCall(this.session);items=key.length?key.map(x=>({keyIndex:x.keyIndex,text:x.action==='send'?'发送 D-Mail':x.text,meta:x.action==='send'?'关键邮件／电话操作':'关键电话 · 拨打'})):c?c.items.map((x,i)=>({call:i,text:x.text,meta:x.action==='call'?'拨打电话':x.action==='compose'?'发送邮件':'发送 D-Mail'})):[{text:'本段没有可用电话',meta:'随剧情推进更新',empty:true}];}
+    if(section==='contacts'){this.phoneTitle='联系人';let contacts=context.contacts.slice();const c=this.session.choice;for(const item of keyPhoneActions(this.session))if(item.action==='call'&&!contacts.some(x=>x.id===item.id))contacts.push(contactInfo(item.id));items=contacts.filter(Boolean).map(c=>({contact:c.id,text:c.name,meta:c.number}));if(!items.length)items=[{text:'暂无开放的联系人',meta:'当前借用手机仅提供剧情操作',empty:true}];}
+    this._phoneItems=items;const pages=Math.max(1,Math.ceil(items.length/4));this._phonePage=Math.max(0,Math.min(this._phonePage||0,pages-1));this.phoneRows=items.slice(this._phonePage*4,this._phonePage*4+4).map((x,i)=>Object.assign({},x,{text:this.visibleText(x.text),meta:this.visibleText(x.meta),key:section+':'+this._phonePage+':'+i+':'+x.text,font:textFont(this.visibleText(x.text)),metaFont:textFont(this.visibleText(x.meta))}));this.phonePageLabel=(this._phonePage+1)+' / '+pages;this.phoneContentHeight=360;this.phoneBackLabel=section==='home'?'返回剧情':'返回手机';this.mode='phone';this.resetPhoneScroll();console.log('STEINS2_RW5 phone',section,this._phonePage,items.length);},
+  resetPhoneScroll(){try{this.$element('phone-scroll').scrollTo({top:0,left:0,behavior:'instant'});}catch(e){}},
+  phonePick(index){if(this.loading||this.mode!=='phone')return;const item=this.phoneRows[index];if(!item||item.empty)return;if(item.keyIndex!==undefined){this.phoneKeyAction(item.keyIndex);return;}if(item.call!==undefined){takeCall(this.session,item.call);this._phoneContinue=true;this.closePhone();return;}if(item.reply!==undefined){this.sendPhoneReply(item.reply);return;}if(item.section){if(item.section==='inbox')console.log('STEINS2_RW5 ordinary inbox read',markOrdinaryInboxRead(this.session,phoneContext(this.session).owner));this._phoneSection=item.section;this._phonePage=0;this.renderPhone();return;}if(item.contact!==undefined){const c=contactInfo(item.contact);const active=currentCall(this.session);if(keyPhoneActions(this.session).some(x=>x.id===c.id)||active&&active.items.some(x=>x.id===c.id)){this._phoneSection='calls';this.renderPhone();return;}const key=this.session.choice,available=key&&key.kind==='phone'&&(key.items||[]).some(x=>x.action==='call'&&x.id===c.id);this.phoneTitle='联系人详情';this._phoneDetailBack='contacts';this._phoneSection='detail';this._phoneMail=undefined;this.phoneReplyLabel='';this.phoneBackLabel='返回联系人';this.setPhoneDetail(this.visibleText(c.name+'\n'+c.number)+'\n\n'+(available?'当前有关键电话操作。返回剧情后选择拨打电话。':'本段没有需要拨打的电话。'));return;}this.openPhoneMessage(item.id,this._phoneSection,this._phoneSection);},
+  phoneKeyAction(index){const c=keyPhoneChoice(this.session),item=c&&c.items[index];if(!item)return;const outgoing=outgoingId(c,item),pending=!!ensureMobile(this.session).keyPhone;choose(this.session,pending?Object.assign({},item,{keyPhone:true}):item,index);this._phoneReturn='play';this._phoneContinue=true;this.clearTyping();if(Number.isInteger(outgoing))this.openPhoneMessage(outgoing,'sent','story');else{this._phoneContinue=false;this.renderFrame();}},
+  setPhoneDetail(text){const wrapped=wrapText(this.visibleText(text),380,23);this.phoneRows=[];this.phoneLines=wrapped.split('\n').map((text,id)=>({id:'phone:'+id+':'+text,text:text||' ',font:textFont(text)}));this.phoneFont=textFont(wrapped);this.phoneContentHeight=Math.max(360,this.phoneLines.length*30+12);this.mode='phone';this.resetPhoneScroll();},
+  openPhoneMessage(id,kind,back){this.clearTyping();this._phoneMail=id;if(kind!=='sent'){const before=this.session.chapter;markMailRead(this.session,id);if(before!==this.session.chapter)this._phoneContinue=true;}this.phoneReplyLabel=kind!=='sent'&&canReply(this.session,id)?'回复':'';this.loading=true;this._phoneSection='detail';this._phoneDetailBack=back;this.phoneTitle=kind==='sent'?'已发送':'邮件';this.phoneOwner=phoneContext(this.session).name+'的手机';this.phonePageLabel=kind==='sent'?'发送完成':'只读邮件';this.phoneBackLabel=back==='story'?'继续剧情':'返回列表';const seq=++this.loadSequence;file.readText({uri:mailPath(id),complete:()=>{},success:data=>{if(seq!==this.loadSequence)return;try{const m=JSON.parse(data.text)[id];this.loading=false;this.setPhoneDetail((kind==='sent'||kind==='draft'?'收件人\n':'发件人\n')+m.sender+(m.title?'\n主题\n'+m.title:'')+'\n\n'+m.text);console.log('STEINS2_RW5 phone message',kind,id);}catch(e){this.fail(e.message);}},fail:()=>{if(seq===this.loadSequence)this.fail('邮件读取失败');}});},
+  phonePrevious(){if(this.mode==='phone'&&this._phoneSection!=='detail'&&this._phonePage>0){this._phonePage--;this.renderPhone();}},
+  phoneNext(){if(this.mode==='phone'&&this._phoneSection!=='detail'&&(this._phonePage+1)*4<this._phoneItems.length){this._phonePage++;this.renderPhone();}},
+  closePhone(){if(this._plotPhone){const advance=this._plotPhone.consumeFrame;this._plotPhone=null;finishPresentation(this.session);if(advance)next(this.session);}this.clearTyping();this.loadSequence++;if(this._phoneContinue){this._phoneContinue=false;this.renderFrame();}else{this.mode=this._phoneReturn||'play';this._autoScrollPaused=false;this.armAuto();this.refreshMailNotice();}},
+  phoneBack(){if(this.loading||this.mode!=='phone')return;if(this._phoneSection==='reply'){this.openPhoneMessage(this._replyParent,'inbox','inbox');return;}if(this._phoneSection==='home'||this._phoneDetailBack==='story'&&this._phoneSection==='detail'){this.closePhone();return;}if(this._phoneSection==='detail'){this._phoneSection=this._phoneDetailBack;this._phoneDetailBack=null;this.renderPhone();return;}this.phoneHome();},
+  backgroundLoaded(){console.log('STEINS2_RW5 background loaded',this.mode,this.backgroundSrc);},
+  backgroundError(){console.log('STEINS2_RW5 background failed',this.mode,this.backgroundSrc);},
+  refreshMailNotice(){if(this._mailBlink){clearTimeout(this._mailBlink);this._mailBlink=null;}this.phoneLabel=pendingMail(this.session,phoneContext(this.session).owner)?'有新邮件':'手机';this.phoneNoticeColor='#d8cba8';if(this.phoneLabel==='手机'||this.mode!=='play'||this._hidden)return;const tick=()=>{this._mailBlink=null;if(this.mode!=='play'||this._hidden||!pendingMail(this.session,phoneContext(this.session).owner))return;this.phoneNoticeColor=this.phoneNoticeColor==='#efa63c'?'#80745a':'#efa63c';this._mailBlink=setTimeout(tick,800);};this._mailBlink=setTimeout(tick,800);},
+  phoneReplyOrPrevious(){if(this._phoneSection==='detail'&&this._phoneMail!==undefined&&canReply(this.session,this._phoneMail)){this.showMailReplies();return;}this.phonePrevious();},
+  showMailReplies(){const id=this._phoneMail;if(!canReply(this.session,id))return;this.loading=true;const seq=++this.loadSequence;file.readText({uri:mailPath(id),complete:()=>{},success:data=>{if(seq!==this.loadSequence)return;const m=JSON.parse(data.text)[id],info=messageInfo(id),ids=info.replies.filter(x=>messageInfo(x).type===3);this.loading=false;this._phoneSection='reply';this._replyParent=id;this.phoneTitle='回复邮件';this.phoneRows=ids.map((reply,i)=>({key:'reply:'+reply,reply,text:this.visibleText((m.keywords||[])[i]||messageInfo(reply).title),meta:'选择后发送',font:textFont((m.keywords||[])[i]||messageInfo(reply).title),metaFont:'sans-serif'}));this.phoneLines=[];this.phoneContentHeight=Math.max(360,ids.length*90);this.phoneBackLabel='取消回复';this.phoneReplyLabel='';this.resetPhoneScroll();},fail:()=>this.fail('回复内容读取失败')});},
+  sendPhoneReply(id){const parent=this._replyParent;if(this.session.deferred&&this.session.deferred.id===parent)answerDeferred(this.session,{action:'reply',id,parent,deferred:true});else sendOptional(this.session,parent,id);this._phoneContinue=true;this._phoneReturn='play';this.openPhoneMessage(id,'sent','story');},
+  clearTyping(){if(this._openingPlayer)this._openingPlayer.pause();if(this._openingLoadTimer){clearTimeout(this._openingLoadTimer);this._openingLoadTimer=null;}if(this._titleAnimator)this._titleAnimator.stop();if(this._chapterCardTimer){clearTimeout(this._chapterCardTimer);this._chapterCardTimer=null;}if(this._mailBlink){clearTimeout(this._mailBlink);this._mailBlink=null;}if(this._auto)this._auto.cancel();if(this.timer!==null){clearTimeout(this.timer);this.timer=null;}},
+  onShow(){this._hidden=false;this.syncTitleMusic();if(this.mode==='opening'){this.resumeOpening();return;}if(this.mode==='chaptercard'){this.armChapterCard();return;}if(this._renderPending&&this.timer===null)this.renderFrame();else{this.armAuto();this.refreshMailNotice();}},
+  onHide(){this._hidden=true;if(this._music)this._music.stop();this.clearTyping();if(!this.loading&&this.mode==='play')this.setDisplayText(this.fullText);},
+  onDestroy(){if(this._openingPlayer)this._openingPlayer.stop();if(this._music)this._music.destroy();this.clearTyping();this.loadSequence++;this._slotsSequence++;this._gallerySequence++;},
+  readRuntime(){file.readText({uri:'/common/graph.txt',complete:()=>{},success:data=>{try{configure(JSON.parse(data.text));this.readProgress();}catch(e){this.fail(e.message);}},fail:()=>this.fail('剧情目录读取失败')});},
   exitApp(){this.clearTyping();this.$app.exit();},
-  readProgress(){this.loading=true;storage.get({complete:()=>{},key:PROGRESS_KEY,default:'',success:data=>{try{this._progress=decodeProgress(data);this._progressReady=true;this.refreshProgress();this.loading=false;}catch(e){this.fail(e.message);}},fail:()=>{this.fail('通关记录读取失败，请返回标题重试');}});},
-  startNew(){if(this.loading||!this._progressReady)return;this.clearTyping();this.loading=true;this.mode='loading';this.clearStoryCache();this.sceneImages=[];this._slotData=[];const seq=++this.loadSequence;setTimeout(()=>file.readText({uri:'/common/startup.txt',complete:()=>{},success:data=>{if(seq!==this.loadSequence)return;try{const state=JSON.parse(data.text);state.history=[];this.session=initializeProgress(state,this._progress);this._autoHops=0;this.renderFrame();}catch(e){this.fail(e.message);}},fail:()=>this.fail('初始状态读取失败')}),0);},
-  refreshProgress(){this.progressLabel='红米手表 5 · 图文版';},
+  readProgress(){this.loading=true;storage.get({complete:()=>{},key:PROGRESS_KEY,default:'',success:data=>{try{this._progress=decodeProgress(data);this.readLatestTitleSave();}catch(e){this.fail(e.message);}},fail:()=>{this.fail('通关记录读取失败，请返回标题重试');}});},
+  readLatestTitleSave(){const ready=()=>{this._progressReady=true;this.refreshProgress();this.loading=false;this.syncTitleMusic();this.writeProgress();};if(this._progress.endings['真结局']){ready();return;}let latest=null;const read=i=>storage.get({complete:()=>{},key:slotKey(i),default:'',success:data=>{try{const meta=decodeSlotMeta(data);if(meta&&Number.isFinite(meta.savedAt)&&(!latest||meta.savedAt>latest.savedAt))latest=meta;}catch(e){}finish(i);},fail:()=>finish(i)});const finish=i=>{if(i+1<SLOT_COUNT){read(i+1);return;}if(latest&&latest.savedAt>(this._progress.titleChangedAt||0)){this._progress=titleProgress(this._progress,latest.state.worldline,'save',latest.savedAt);this._progressDirty=true;}ready();};read(0);},
+  startNew(){if(this.loading||!this._progressReady)return;this._progress=titleProgress(this._progress,INITIAL_WORLDLINE,'new',Date.now());this._progressDirty=true;this.refreshProgress();this.writeProgress();this.autoEnabled=false;this.refreshSettings();this.clearTyping();this.clearStoryCache();this._slotData=[];this._phoneView=false;this.session=withProgress(newState(catalog.initial,true),this._progress);this.renderFrame();},
+  refreshProgress(){this.progressLabel='红米手表 5 · 场景重制版';this.titleWorldline=titleRate(this._progress);},
   syncProgress(){
-    if(!this._progressReady||this.session.progression!=='story')return;const progress=progressFromState(this.session);
+    if(!this._progressReady||this.session.progression!=='story')return;const progress=progressFromState(this.session,this._progress,Date.now());
     if(JSON.stringify(progress)===JSON.stringify(this._progress))return;
     this._progress=progress;this._progressDirty=true;this.refreshProgress();this.writeProgress();
   },
@@ -121,71 +183,71 @@ export default {
   refreshBrowse(){const routes=this.mode==='routes';this._browseItems=routes?catalog.routes:catalog.chapters.filter(x=>x.route===this._browseRoute);this.browseTitle=routes?'选择路线':'选择章节';const start=this.browsePage*4;this.browseRows=this._browseItems.slice(start,start+4).map((item,i)=>({key:(routes?'route:':'chapter:'+this._browseRoute+':')+(start+i),index:start+i,name:this.visibleText(item.name),font:textFont(item.name),detail:routes?item.scenes.length+' 个章节':'点击开始阅读'}));this.browseLabel=(routes?'章节阅读 · ':this.visibleText(catalog.routes[this._browseRoute].name)+' · ')+(this.browsePage+1)+' / '+Math.ceil(this._browseItems.length/4);this.browseFont=textFont(this.browseLabel);},
   previousBrowse(){if(this.browsePage>0){this.browsePage--;this.refreshBrowse();}},
   nextBrowse(){if(this.browsePage<Math.ceil(this._browseItems.length/4)-1){this.browsePage++;this.refreshBrowse();}},
-  selectBrowse(row){const index=this.browsePage*4+row;if(this.mode==='routes'){this._browseRoute=index;this.browsePage=0;this.mode='chapters';this.refreshBrowse();return;}const item=this._browseItems[index];if(!item)return;this.session=withProgress(newChapterState(item),this._progress);if(item.mailRead)this.session.letters[item.mailRead]=2;this.cachedChapter=0;this._autoHops=0;this.renderFrame();},
+  selectBrowse(row){const index=this.browsePage*4+row;const item=this._browseItems[index];if(!item)return;this.session=withProgress(newChapterState(item),this._progress);this._phoneView=false;this.clearStoryCache();this.renderFrame();},
   closeBrowse(){this.toTitle();},
   continueGame(){this.openSlots('load');},
-  clearStoryCache(){this.cachedChapter=0;this.ops=[];this._blockCache={};this._blockOrder=[];this._blockSizes={};this._blockBytes=0;},
-  cacheBlock(key,ops,size){if(!this._blockSizes)this._blockSizes={};if(ops){this._blockCache[key]=ops;this._blockBytes=(this._blockBytes||0)-(this._blockSizes[key]||0)+(size||0);this._blockSizes[key]=size||0;}const old=this._blockOrder.indexOf(key);if(old>=0)this._blockOrder.splice(old,1);this._blockOrder.push(key);while(this._blockOrder.length>3||(this._blockBytes>40000&&this._blockOrder.length>1)){const drop=this._blockOrder.shift();delete this._blockCache[drop];this._blockBytes-=this._blockSizes[drop];delete this._blockSizes[drop];}},
-  readResource(frame){const kind=frame.mail!==undefined?'mail':'channel',id=frame[kind],seq=++this.loadSequence;this.loading=true;file.readText({uri:'/common/'+kind+'/'+id+'.txt',complete:()=>{},success:data=>{if(seq!==this.loadSequence)return;try{const rows=JSON.parse(data.text);if(kind==='mail')provideMailText(id,rows);else provideChannelText(id,rows);this.timer=setTimeout(()=>{this.timer=null;this.renderFrame();},0);}catch(e){this.fail(e.message);}},fail:()=>this.fail('手机内容读取失败')});},
+  clearStoryCache(){this.cachedChapter='';this.ops=null;this.opsBase=0;this._sceneSignature='';this._mobileLoaded='';},
+  cacheBlock(){},
+  readResource(){this.fail('剧情数据缺失');},
   readChapter(chapter,done){
-    const block=Math.floor(this.session.cursor/512),key=chapter+':'+block;
-    if(this.cachedChapter===key){done();return;}
-    if(this._blockCache[key]){this.ops=this._blockCache[key];this.cacheBlock(key);this.opsBase=block*512;this.cachedChapter=key;done();return;}
-    this.loading=true;const seq=++this.loadSequence;
-    file.readText({complete:()=>{},uri:'/common/story/'+chapter+'/'+block+'.txt',success:data=>{
-      if(seq!==this.loadSequence)return;
-      try{const ops=JSON.parse(data.text);if(!Array.isArray(ops))throw new Error('章节格式无效');this.ops=ops;this.opsBase=block*512;this.cachedChapter=key;this.cacheBlock(key,ops,data.text.length);this.loading=true;this.timer=setTimeout(()=>{this.timer=null;done();},0);}
-      catch(e){this.fail(e.message);}
-    },fail:(data,code)=>{if(seq===this.loadSequence)this.fail('第 '+chapter+' 章读取失败：'+code+' '+String(data||'').slice(0,100));}});
+    const p=locate(this.session);if(p.type!=='text'){done();return;}this.opsBase=p.base;
+    if(this.session.chapter.charAt(0)==='c'){setMobileEvents(this.session.chapter,[]);this._mobileLoaded=this.session.chapter;}
+    if(this._mobileLoaded!==this.session.chapter){const node=this.session.chapter,seq=++this.loadSequence;file.readText({uri:mobileEventPath(node),complete:()=>{},success:data=>{if(seq!==this.loadSequence)return;setMobileEvents(node,JSON.parse(data.text)[node]);this._mobileLoaded=node;this.readChapter(node,done);},fail:()=>this.fail('手机事件读取失败')});return;}
+    if(this.cachedChapter===p.file&&this.ops){done();return;}
+    this.ops=null;this.cachedChapter='';const seq=++this.loadSequence;
+    file.readText({uri:'/common/story/'+p.file,complete:()=>{},success:data=>{if(seq!==this.loadSequence)return;try{const block=JSON.parse(data.text);if(!block.frames||!block.views)throw Error('剧情分块无效');this.ops=block;this.cachedChapter=p.file;done();}catch(e){this.fail(e.message);}},fail:()=>this.fail('剧情读取失败，请返回标题重试')});
   },
   renderFrame(){
+    if(this._music)this._music.stop();
     this.loading=true;this._renderPending=true;this.clearTyping();this.readChapter(this.session.chapter,()=>{
-      if(this._hidden)return;
-      try{
-        let f;const started=Date.now(),batchLimit=this._chapterSkip?64:12,budget=this._chapterSkip?40:12;
-        for(let batch=0;batch<batchLimit;batch++){
-          f=this._chapterSkip?readChapterSkip(this.ops,this.session,this._chapterSkip,this.opsBase,catalog.scenes[String(this.session.chapter)].length):readFrame(this.ops,this.session,this.opsBase,catalog.scenes[String(this.session.chapter)].length);
-          if(f.type!=='jump'&&f.type!=='yield')break;
-          this._autoHops=(this._autoHops||0)+1;if(this._autoHops>20000)throw new Error('剧情暂未推进，请读取存档重试');
-          const block=Math.floor(this.session.cursor/512),key=this.session.chapter+':'+block;
-          if(batch<batchLimit-1&&Date.now()-started<budget&&this._blockCache[key]){this.ops=this._blockCache[key];this.cacheBlock(key);this.opsBase=block*512;this.cachedChapter=key;continue;}
-          this.timer=setTimeout(()=>{this.timer=null;this.renderFrame();},0);return;
+      if(this._hidden)return;try{
+        const f=readFrame(this.ops,this.session,this.opsBase);if(f.type==='yield')throw Error('剧情位置与分块不一致');
+        this._renderPending=false;this._chapterSkip=null;this.loading=false;this.syncProgress();
+        if(f.type==='choice'){
+          this.choiceViewport=f.kind==='reply'?244:164;this.choiceListHeight=f.kind==='reply'?202:282;
+          this.setChoiceHeading(wrapText(f.heading||'选择下一步',380,23));this.choiceTag=f.category||'关键剧情操作';this.choiceHeadingFont=textFont(this.choiceHeading);this.choiceTextHeight=this.choiceHeading.split('\n').length*30+8;this.choiceHeadingHeight=this.choiceTextHeight+28;this.options=this.visibleOptions(f.items);this.mode='choice';
+          try{this.$element('mail-scroll').scrollTo({top:0,left:0,behavior:'instant'});}catch(e){}console.log('STEINS2_RW5 choice',this.session.chapter,this.session.cursor,f.kind,f.id);return;
         }
-        if(f.type==='resource'){this.readResource(f);return;}
-        this.syncProgress();
-        this._autoHops=0;this._chapterSkip=null;this._renderPending=false;this.loading=false;
-        this.backgroundSrc=imagePath(this.session.background);
-        this.sceneImages=(this.session.sceneLayers||[]).map(x=>Object.assign({},x,{src:imagePath(x.image)}));
-        const bodies=this.session.bodies||[];this.bodySrc=bodies[0]?imagePath(bodies[0]):'';this.bodySecond=bodies[1]?imagePath(bodies[1]):'';this.bodyThird=bodies[2]?imagePath(bodies[2]):'';
-        const first=portraitBox(this.bodySrc,bodies.length,0),second=portraitBox(this.bodySecond,bodies.length,1),third=portraitBox(this.bodyThird,bodies.length,2);
-        this.portraitWidth=first.width;this.portraitHeight=first.height;this.portraitTop=first.top;this.portraitLeft=first.left;
-        this.portraitSecondWidth=second.width;this.portraitSecondHeight=second.height;this.portraitSecondTop=second.top;this.portraitSecondLeft=second.left;
-        this.portraitThirdWidth=third.width;this.portraitThirdHeight=third.height;this.portraitThirdTop=third.top;this.portraitThirdLeft=third.left;
-        this.chapterLabel=storyDate(this.session);this.chapterFont='sans-serif';this.hasNextChapter=!this.session.ended;
-        if(f.type==='map'){this.renderMap(f);return;}
-        if(f.type==='choice'){this.choiceViewport=this.session.choice.kind==='mailView'?340:134;this.choiceListHeight=this.session.choice.kind==='mailView'?90:296;this.choiceHeading=wrapText(f.heading||'选择下一步',380,23);this.choiceTag=f.category||'';this.choiceHeadingFont=textFont(this.choiceHeading);this.choiceTextHeight=this.choiceHeading.split('\n').length*30+8;this.choiceHeadingHeight=this.choiceTextHeight+(this.choiceTag?28:0);this.options=this.visibleOptions(f.items);this.mode='choice';try{this.$element('mail-scroll').scrollTo({top:0,left:0,behavior:'instant'});}catch(e){}console.log('STEINS_RW5 choice',this.session.chapter,this.session.cursor,this.session.choice.kind);return;}
-        if(f.type==='end'){this.mode='end';this.endingLabel=(this.session.endingName||'本篇')+' · 阅读完毕';console.log('STEINS_RW5 ending',this.session.chapter,this.endingLabel);return;}
-        this.mode='play';this.speaker=this.characterName(this.visibleText(f.speaker));this.fullText=wrapText(dialogueText(this.visibleText(f.text)),384,this.fontSize);this.dialogueHeight=this.fullText.split('\n').length*34+8;this.speakerFont=textFont(this.speaker);this.dialogueFont=textFont(this.fullText);this.displayText='';
-        this.resetDialogueScroll();
-        console.log('STEINS_RW5 frame',this.session.chapter,this.session.cursor);
-        if(this.textSpeed===0){this.displayText=this.fullText;return;}
-        const tick=()=>{this.displayText=this.fullText.slice(0,this.displayText.length+1);if(this.displayText.length<this.fullText.length)this.timer=setTimeout(tick,this.textSpeed);else this.timer=null;};tick();
+        if(f.skipBlank){next(this.session);this.renderFrame();return;}
+        if(f.type==='text'&&wantsOpening(this.session)){this._openingReturn='story';this.startOpening();return;}
+        if(f.type==='text'){const card=takeChapterCard(this.session);if(card){this.sceneImages=[];this._sceneSignature='';this._chapterCardReady=false;this.chapterCardSrc=card.src;this.mode='chaptercard';console.log('STEINS2_RW5 chapter card',card.id,this.session.chapter,this.session.cursor);return;}}
+        if(f.type==='text'&&plotPresentation(this.session)){const p=plotPresentation(this.session);this._plotPhone={consumeFrame:f.speaker==='手机信息'};this.session.mobile.activePhoneOwner=p.owner;this._phoneReturn='play';this._phoneContinue=true;this.openPhoneMessage(p.id,p.kind==='send'||p.kind==='draft'?'draft':'inbox','story');if(p.kind==='send'){this.phoneTitle='发送邮件';this.phonePageLabel='确认发送内容';this.phoneBackLabel='发送并继续';}else if(p.kind==='draft'){this.phoneTitle='邮件草稿';this.phonePageLabel='编辑邮件';this.phoneBackLabel='继续剧情';}return;}
+        if(f.type==='end'){this.autoEnabled=false;this.refreshSettings();this.sceneImages=[];this.mode='end';this.endingLabel=this.session.endingName+' · 阅读完毕';console.log('STEINS2_RW5 ending',this.endingLabel);return;}
+        const signature=JSON.stringify(this.session.sceneLayers);if(signature!==this._sceneSignature){this.sceneImages=this.session.sceneLayers.map(x=>Object.assign({},x,{src:imagePath(x.image)}));this._sceneSignature=signature;}this.chapterLabel=storyDate(this.session);this.chapterFont='sans-serif';this.hasNextChapter=true;
+        this._autoScrollPaused=false;this.mode='play';this.speaker=this.visibleText(f.speaker);this.fullText=wrapText(dialogueText(this.visibleText(f.text)),384,this.fontSize);this.dialogueHeight=this.fullText.split('\n').length*34+8;this.speakerFont=textFont(this.speaker);this.dialogueFont=textFont(this.fullText);this.setDisplayText('');this.resetDialogueScroll();
+        this.refreshMailNotice();console.log('STEINS2_RW5 frame',this.session.chapter,this.session.cursor,this.session.sourceSite);
+        if(this.textSpeed===0&&!this.autoEnabled){this.setDisplayText(this.fullText);this.armAuto();return;}
+        const tick=()=>{this.setDisplayText(this.fullText.slice(0,this.displayText.length+1));if(this.displayText.length<this.fullText.length)this.timer=setTimeout(tick,this.autoEnabled?30:this.textSpeed);else{this.timer=null;this.armAuto();}};tick();
       }catch(e){this.fail(e.message);}
     });
   },
-  advance(){if(this.loading||this.mode!=='play')return;if(this.timer!==null){this.clearTyping();this.displayText=this.fullText;return;}next(this.session);this.renderFrame();},
-  resetDialogueScroll(){try{this.$element('dialogue-scroll').scrollTo({top:0,left:0,behavior:'instant'});}catch(e){}},
-  dialogueTouchStart(event){const p=(event.touches||event.changedTouches||[])[0];this._dialogueTouch=p?{x:p.clientX,y:p.clientY}:null;this._dialogueMoved=false;this._dialogueBlockedUntil=0;},
-  dialogueTouchMove(event){const p=(event.changedTouches||event.touches||[])[0],start=this._dialogueTouch;if(p&&start&&(Math.abs(p.clientX-start.x)>8||Math.abs(p.clientY-start.y)>8)){this._dialogueMoved=true;this._dialogueBlockedUntil=Date.now()+300;}},
-  dialogueScrolled(){this._dialogueMoved=true;this._dialogueBlockedUntil=Date.now()+300;},
+  watchOpening(){if(this.loading||this.mode!=='extra')return;this._openingReturn='extra';this.startOpening();},
+  startOpening(){if(this._music)this._music.stop();this.clearTyping();this.sceneImages=[];this._sceneSignature='';this.speaker='';this.fullText='';this.setDisplayText('');this._openingReady=false;this.mode='opening';this._openingPlayer.reset();this.resumeOpening();console.log('STEINS2_RW5 opening start',this.session.chapter,this.session.cursor);},
+  resumeOpening(){if(this.mode!=='opening'||this._hidden)return;if(!this._openingReady){if(this._openingLoadTimer)clearTimeout(this._openingLoadTimer);this._openingLoadTimer=setTimeout(()=>this.openingError(),10000);return;}if(this.soundEnabled)this._music.playOpening(this._openingPlayer.position());this._openingPlayer.resume();},
+  paintOpening(src,left,top){if(this.openingSrc!==src)this.openingSrc=src;if(this.openingLeft!==left)this.openingLeft=left;if(this.openingTop!==top)this.openingTop=top;},
+  openingLoaded(){if(this.mode!=='opening'||this._openingReady)return;this._openingReady=true;if(this._openingLoadTimer){clearTimeout(this._openingLoadTimer);this._openingLoadTimer=null;}this.resumeOpening();console.log('STEINS2_RW5 opening playing');},
+  skipOpening(){if(this.mode==='opening')this.finishOpening('skipped');},
+  openingError(){if(this.mode!=='opening')return;console.error('STEINS2_RW5 opening unavailable');this.finishOpening('unavailable');},
+  finishOpening(reason){if(this.mode!=='opening')return;this.clearTyping();this._openingPlayer.stop();this._music.stop();this.mode='loading';this.openingSrc='';console.log('STEINS2_RW5 opening complete',reason,this._openingReturn);if(this._openingReturn==='extra'){this._openingReturn='story';this.mode='extra';this.loading=false;this.syncTitleMusic();console.log('STEINS2_RW5 opening returned extra');}else{this.session.openingDone=true;this.renderFrame();}},
+  chapterCardLoaded(){if(this.mode!=='chaptercard')return;this._chapterCardReady=true;this.armChapterCard();},
+  armChapterCard(){if(this._chapterCardTimer)clearTimeout(this._chapterCardTimer);this._chapterCardTimer=null;if(this.mode==='chaptercard'&&!this._hidden&&this._chapterCardReady)this._chapterCardTimer=setTimeout(()=>this.continueChapter(),CHAPTER_CARD_HOLD_MS);},
+  continueChapter(){if(this.mode!=='chaptercard'||this.loading)return;this.clearTyping();this.mode='loading';this.renderFrame();},
+  chapterCardError(){if(this.mode==='chaptercard')this.fail('章节标题图片读取失败');},
+  advance(){if(this.loading||this.mode!=='play')return;this._auto.cancel();if(this._autoScrollPaused){this._autoScrollPaused=false;this.armAuto();return;}if(this.timer!==null){this.clearTyping();this.setDisplayText(this.fullText);this.armAuto();return;}next(this.session);this.renderFrame();},
+  setDisplayText(value){this.displayText=value;this.dialogueLines=String(value||'').split('\n').map((text,id)=>({id:'line:'+id+':'+text,text:text||' '}));},
+  setChoiceHeading(value){this.choiceHeading=value;this.choiceLines=String(value||'').split('\n').map((text,id)=>({id:'mail:'+id+':'+text,text:text||' '}));},
+  resetDialogueScroll(){this._scrollResetUntil=Date.now()+250;try{this.$element('dialogue-scroll').scrollTo({top:0,left:0,behavior:'instant'});}catch(e){}},
+  dialogueTouchStart(event){this._scrollResetUntil=0;this._auto.cancel();const p=(event.touches||event.changedTouches||[])[0];this._dialogueTouch=p?{x:p.clientX,y:p.clientY}:null;this._dialogueMoved=false;this._dialogueBlockedUntil=0;},
+  dialogueTouchMove(event){const p=(event.changedTouches||event.touches||[])[0],start=this._dialogueTouch;if(p&&start&&(Math.abs(p.clientX-start.x)>8||Math.abs(p.clientY-start.y)>8)){this._auto.cancel();this._autoScrollPaused=true;this._dialogueMoved=true;this._dialogueBlockedUntil=Date.now()+300;}},
+  dialogueScrolled(){if(Date.now()<(this._scrollResetUntil||0))return;this._auto.cancel();this._autoScrollPaused=true;this._dialogueMoved=true;this._dialogueBlockedUntil=Date.now()+300;},
   dialogueTap(){if(this._dialogueMoved||Date.now()<(this._dialogueBlockedUntil||0))return;this.advance();},
-  renderMap(frame){this.loading=true;const seq=++this.loadSequence;file.readText({complete:()=>{},uri:'/common/map-preview.txt',success:data=>{if(seq!==this.loadSequence)return;try{const choices=previewMap(JSON.parse(data.text),this.session,frame);if(!choices.length)throw new Error('此地图阶段暂无支持的剧情选项，请返回标题选择其他篇章');this.options=this.visibleOptions(choices);this.mode='choice';this.loading=false;console.log('STEINS_RW5 map ready',this.session.chapter,this.session.cursor,choices.map(x=>x.value).join(','));}catch(e){this.fail(e.message);}},fail:()=>{if(seq===this.loadSequence)this.fail('地图选项读取失败');}});},
-  goNextChapter(){if(this.loading||this.mode!=='menu')return;if(this.resumeMode==='choice'){this.mode='choice';this.toast('请先作出当前选择');return;}this.clearTyping();this._chapterSkip=nextChapter(this.session);if(!this._chapterSkip){this.toast('本篇已结束');return;}this._autoHops=0;this.loading=true;this.renderFrame();console.log('STEINS_RW5 safe chapter skip',this.session.chapter,this.session.cursor);},
-  pick(index){if(this.mode!=='choice'||this.loading)return;choose(this.session,this.options[index],index);this.renderFrame();},
-  showPhone(){if(this.loading||this.mode!=='play')return;this.clearTyping();this._chapterSkip=null;if(openPhone(this.session)){console.log('STEINS_RW5 phone opened',this.session.chapter,this.session.cursor);this.renderFrame();}},
-  goBack(){if(this.loading||this.mode!=='play')return;this.clearTyping();if(previous(this.session)){if(this.session.progression==='story')withProgress(this.session,this._progress);this.renderFrame();}else this.toast('已经是第一句');},
-  showMenu(){if(this.loading||(this.mode!=='play'&&this.mode!=='choice'))return;this.clearTyping();this.displayText=this.fullText;this.resumeMode=this.mode;this.mode='menu';console.log('STEINS_RW5 menu',this.session.chapter);},
-  resume(){this.mode=this.resumeMode;},
+  renderMap(){this.fail('剧情数据缺失');},
+  goNextChapter(){if(this.loading||this.mode!=='menu')return;if(this.resumeMode==='choice'){this.mode='choice';this.toast('请先作出当前选择');return;}this.clearTyping();const before=Date.now();if(!nextChapter(this.session)){this.toast('本篇已结束');return;}this.renderFrame();console.log('STEINS2_RW5 skip direct',Date.now()-before);},
+  pick(index){if(this.mode!=='choice'||this.loading)return;const item=this.options[index];if(!item)return;const outgoing=outgoingId(this.session.choice,item);choose(this.session,item,index);if(item.action==='readDeferred'){this._phoneReturn='play';this._phoneContinue=true;this.openPhoneMessage(item.id,'inbox','story');return;}if(Number.isInteger(outgoing)){this._phoneReturn='play';this._phoneContinue=true;this.openPhoneMessage(outgoing,'sent','story');return;}this.renderFrame();},
+  showPhone(){if(this.loading||(this.mode!=='play'&&this.mode!=='choice'))return;this.clearTyping();this.setDisplayText(this.fullText);this._phoneReturn=this.mode;this._phoneContinue=false;this.phoneHome();},
+  goBack(){if(this.loading||this.mode!=='play')return;this.autoEnabled=false;this.refreshSettings();this.clearTyping();if(previous(this.session)){if(this.session.progression==='story')withProgress(this.session,this._progress);this.renderFrame();}else this.toast('已经是第一句');},
+  showMenu(){if(this.loading||(this.mode!=='play'&&this.mode!=='choice'))return;this.clearTyping();this.setDisplayText(this.fullText);this.resumeMode=this.mode;this.mode='menu';console.log('STEINS2_RW5 menu',this.session.chapter);},
+  resume(){this.mode=this.resumeMode;this._autoScrollPaused=false;this.armAuto();this.refreshMailNotice();},
   swipe(event){
     if(this.mode==='gallery'){if(event.direction==='left')this.nextGalleryPage();if(event.direction==='right')this.previousGalleryPage();return;}
     if(event.direction==='right'&&(this.mode==='play'||this.mode==='choice'))this.showMenu();
@@ -195,9 +257,9 @@ export default {
   openSlots(role){
     if(this.loading||this.storageBusy)return;this.clearTyping();this._slotsReturnMode=this.mode;this._slotRole=role;
     this._pendingSave=role==='save'?createSave(this.session,this.resumeMode,Date.now()):null;
-    this.slotTitle=role==='save'?'选择保存栏位':'选择读取栏位';this.slotPage=0;this.slotRows=[];this.mode='slots';this.loading=true;
+    this.slotTitle=role==='save'?'SAVE / 保存':'LOAD / 读取';this.slotPage=0;this.slotRows=[];this.mode='slots';this.loading=true;
     const seq=++this._slotsSequence;this._slotData=Array(SLOT_COUNT).fill(null);
-    const ready=()=>{if(seq!==this._slotsSequence)return;this.loading=false;this.refreshSlotRows();console.log('STEINS_RW5 slots ready',role);};
+    const ready=()=>{if(seq!==this._slotsSequence)return;this.loading=false;this.refreshSlotRows();console.log('STEINS2_RW5 slots ready',role);};
     const finish=index=>{
       if(seq!==this._slotsSequence)return;
       if(index+1<SLOT_COUNT){setTimeout(()=>readSlot(index+1),0);return;}
@@ -207,20 +269,20 @@ export default {
     const readSlot=i=>{if(seq!==this._slotsSequence)return;storage.get({complete:()=>{},key:slotKey(i),default:'',success:data=>{if(seq!==this._slotsSequence)return;try{this._slotData[i]=decodeSlotMeta(data);}catch(e){this._slotData[i]={invalid:true};}finish(i);},fail:()=>{if(seq!==this._slotsSequence)return;this._slotData[i]={invalid:true};finish(i);}});};
     readSlot(0);
   },
-  renderRestored(){if(!this.session.needsVisualRecovery){this.renderFrame();return;}this.loading=true;const state=this.session;file.readText({uri:'/common/visual/'+(state.rootChapter||state.chapter)+'.txt',complete:()=>{},success:data=>{if(this.session!==state)return;try{recoverGraphics(state,JSON.parse(data.text));}catch(e){}this.loading=false;this.renderFrame();},fail:()=>{if(this.session===state){this.loading=false;this.renderFrame();}}});},
+  renderRestored(){this.autoEnabled=false;this.refreshSettings();this._phoneView=false;this.renderFrame();},
   refreshSlotRows(){const start=this.slotPage*4;const rows=[];for(let i=start;i<Math.min(start+4,SLOT_COUNT);i++)rows.push(slotRow(i,this._slotData[i]));this.slotRows=rows;this.slotPageLabel=SLOT_COUNT+' 个栏位 · 第 '+(this.slotPage+1)+' / '+Math.ceil(SLOT_COUNT/4)+' 页';},
   previousSlotPage(){if(this.loading||this.slotPage===0)return;this.slotPage--;this.refreshSlotRows();},
   nextSlotPage(){if(this.loading||this.slotPage>=Math.ceil(SLOT_COUNT/4)-1)return;this.slotPage++;this.refreshSlotRows();},
-  closeSlots(){if(this.storageBusy)return;this._slotsSequence++;this._slotData=[];this._pendingSave=null;this.loading=false;this.mode=this._slotsReturnMode;},
+  closeSlots(){if(this.storageBusy)return;this._slotsSequence++;this._slotData=[];this._pendingSave=null;this.loading=false;this.mode=this._slotsReturnMode;this.syncTitleMusic();},
   selectSlot(index){
     if(this.loading||this.storageBusy||this.mode!=='slots'||index<0||index>=SLOT_COUNT)return;
     const saved=this._slotData[index];
     if(this._slotRole==='load'){
       if(!saved){this.toast('这个栏位还没有存档');return;}if(saved.invalid){this.toast('这个存档无法读取');return;}
-      const seq=this._slotsSequence;this.loading=true;storage.get({complete:()=>{},key:saved.legacy?LEGACY_KEY:slotKey(index),default:'',success:data=>{if(seq!==this._slotsSequence)return;try{const full=decodeSave(data);if(!full)throw Error('存档不存在');this.session=full.state;if(this.session.progression==='story')withProgress(this.session,this._progress);this._slotData=[];this._pendingSave=null;this.clearStoryCache();this._slotsSequence++;this.renderRestored();console.log('STEINS_RW5 slot loaded',index+1,this.session.chapter,this.session.cursor);}catch(e){this.loading=false;this.toast(e.message);}},fail:()=>{this.loading=false;this.toast('存档读取失败');}});return;
+      const seq=this._slotsSequence;this.loading=true;storage.get({complete:()=>{},key:saved.legacy?LEGACY_KEY:slotKey(index),default:'',success:data=>{if(seq!==this._slotsSequence)return;try{const full=decodeSave(data);if(!full)throw Error('存档不存在');this.session=full.state;if(this.session.progression==='story')withProgress(this.session,this._progress);this._slotData=[];this._pendingSave=null;this.clearStoryCache();this._slotsSequence++;this.renderRestored();console.log('STEINS2_RW5 slot loaded',index+1,this.session.chapter,this.session.cursor);}catch(e){this.loading=false;this.toast(e.message);}},fail:()=>{this.loading=false;this.toast('存档读取失败');}});return;
     }
     this._pendingSlotIndex=index;
-    if(saved){const row=slotRow(index,saved);this.overwriteTitle='覆盖'+row.title+'？';this.overwriteDetail=row.meta+'\n覆盖后将保存当前进度。';this.overwriteFont=textFont(this.overwriteDetail);this.mode='overwrite';console.log('STEINS_RW5 overwrite',index+1);return;}
+    if(saved){const row=slotRow(index,saved);this.overwriteTitle='覆盖'+row.title+'？';this.overwriteDetail=row.meta+'\n覆盖后将保存当前进度。';this.overwriteFont=textFont(this.overwriteDetail);this.mode='overwrite';console.log('STEINS2_RW5 overwrite',index+1);return;}
     this.commitSlot();
   },
   confirmOverwrite(){if(this.mode==='overwrite')this.commitSlot();},
@@ -229,8 +291,9 @@ export default {
     if(this.storageBusy||!this._pendingSave)return;
     const index=this._pendingSlotIndex,seq=this._slotsSequence,payload=this._pendingSave;payload.savedAt=Date.now();this.storageBusy=true;this.loading=true;
     storage.set({complete:()=>{},key:slotKey(index),value:JSON.stringify(payload),success:()=>{
-      if(seq!==this._slotsSequence)return;this._slotData=[];this._pendingSave=null;this.storageBusy=false;this.loading=false;this._slotsSequence++;this.mode=this.resumeMode;
-      this.toast('已保存到存档 '+('0'+(index+1)).slice(-2));console.log('STEINS_RW5 slot saved',index+1,payload.state.chapter,payload.state.cursor);
+      this._progress=titleProgress(this._progress,worldlineFor(payload.state),'save',payload.savedAt);this._progressDirty=true;this.refreshProgress();this.writeProgress();
+      if(seq!==this._slotsSequence)return;this._slotData=[];this._pendingSave=null;this.storageBusy=false;this.loading=false;this._slotsSequence++;this.mode=this.resumeMode;this._autoScrollPaused=false;this.armAuto();
+      this.toast('已保存到存档 '+('0'+(index+1)).slice(-2));console.log('STEINS2_RW5 slot saved',index+1,payload.state.chapter,payload.state.cursor);
     },fail:()=>{if(seq!==this._slotsSequence)return;this.storageBusy=false;this.loading=false;this.toast('保存失败，请重试');}});
   },
   openGallery(){
@@ -239,87 +302,143 @@ export default {
     this.loading=true;const seq=++this._gallerySequence;
     file.readText({complete:()=>{},uri:'/common/gallery.txt',success:data=>{
       if(seq!==this._gallerySequence)return;
-      try{const items=JSON.parse(data.text);if(!Array.isArray(items)||!items.length)throw new Error('CG 目录为空');this._galleryCatalog=groupGallery(items);this._galleryTotal=items.reduce((sum,item)=>sum+item.images.length,0);this.galleryPage=0;this.loading=false;this.refreshGallery();console.log('STEINS_RW5 gallery ready',this._galleryCatalog.length,items.length);}catch(e){this.fail(e.message);}
+      try{const items=JSON.parse(data.text);if(!Array.isArray(items)||!items.length)throw new Error('CG 目录为空');this._galleryCatalog=groupGallery(items);this._galleryTotal=items.reduce((sum,item)=>sum+item.images.length,0);this.galleryPage=0;this.loading=false;this.refreshGallery();console.log('STEINS2_RW5 gallery ready',this._galleryCatalog.length,items.length);}catch(e){this.fail(e.message);}
     },fail:(data,code)=>{if(seq===this._gallerySequence)this.fail('CG 目录读取失败：'+code);}});
   },
   refreshGallery(){const start=this.galleryPage*4;const items=this._galleryCatalog.slice(start,start+4).map((item,i)=>({image:item.image,label:item.label+'\n'+item.variants.length+' 张',index:start+i,font:textFont(item.label+'张'),src:galleryImagePath(item.image)}));this.galleryTop=items.slice(0,2);this.galleryBottom=items.slice(2,4);this.galleryPageLabel=this._galleryCatalog.length+' 组 · '+this._galleryTotal+' 张 · 第 '+(this.galleryPage+1)+' / '+Math.ceil(this._galleryCatalog.length/4)+' 页';},
   previousGalleryPage(){if(this.loading||this.galleryPage===0)return;this.galleryPage--;this.refreshGallery();},
   nextGalleryPage(){if(this.loading||this.galleryPage>=Math.ceil(this._galleryCatalog.length/4)-1)return;this.galleryPage++;this.refreshGallery();},
   viewCg(index){if(this.loading||index<0||index>=this._galleryCatalog.length)return;this.cgIndex=index;this.cgVariant=0;this.mode='cg';this.renderCg();},
-  renderCg(){const group=this._galleryCatalog[this.cgIndex],item=group.variants[this.cgVariant];this.cgSrc=galleryImagePath(item.image);this.cgLabel=group.label+(group.variants.length>1?' · 差分 '+(this.cgVariant+1)+' / '+group.variants.length+' · 点击切换':'');this.cgFont=textFont(this.cgLabel);console.log('STEINS_RW5 cg',this.cgIndex+1,this.cgVariant+1,item.image);},
+  renderCg(){const group=this._galleryCatalog[this.cgIndex],item=group.variants[this.cgVariant];this.cgSrc=galleryImagePath(item.image);this.cgLabel=group.label+(group.variants.length>1?' · 差分 '+(this.cgVariant+1)+' / '+group.variants.length+' · 点击切换':'');this.cgFont=textFont(this.cgLabel);console.log('STEINS2_RW5 cg',this.cgIndex+1,this.cgVariant+1,item.image);},
   cycleCg(){if(this.mode!=='cg'||this.loading)return;const count=this._galleryCatalog[this.cgIndex].variants.length;if(count<2)return;this.cgVariant=stepVariant(this.cgVariant,1,count);this.renderCg();},
   previousCg(){if(this.cgIndex>0)this.viewCg(this.cgIndex-1);},
   nextCg(){if(this.cgIndex<this._galleryCatalog.length-1)this.viewCg(this.cgIndex+1);},
   backToGallery(){this.galleryPage=Math.floor(this.cgIndex/4);this.refreshGallery();this.mode='gallery';},
-  refreshSettings(){this.speedLabel=this.textSpeed===0?'显示速度：即时':'显示速度：逐字';this.fontLabel=this.fontSize===28?'字号：大':'字号：标准';},
-  persistSettings(){storage.set({complete:()=>{},key:'steins_rw5_settings_v1',value:JSON.stringify({fontSize:this.fontSize,textSpeed:this.textSpeed}),success:()=>{},fail:()=>{}});},
+  refreshSettings(){this.speedLabel=this.textSpeed===0?'文字显示：即时':'文字显示：逐字';this.fontLabel=this.fontSize===28?'字号：大':'字号：标准';this.autoLabel='自动播放：'+(this.autoEnabled?'开启':'关闭');this.autoSpeedLabel='自动速度：'+['慢速','标准','快速'][this.autoSpeed];this.soundLabel='游戏音量：'+(!this.soundEnabled?'关闭':this.musicAvailable?'开启':'暂不可用');this.titleAnimationLabel='标题动画：'+(this.titleAnimationEnabled?'开启':'关闭');},
+  syncTitleMusic(){if(this._titleAnimator)this._titleAnimator.update();if(!this._music)return;const titleMode=['title','config','extra','routes','chapters','gallery','cg','help'].indexOf(this.mode)>=0||this.mode==='slots'&&this._slotsReturnMode==='title';this._music.update(this._settingsReady&&this._progressReady&&this.soundEnabled&&titleMode&&!this._hidden&&!this._renderPending);},
+  toggleTitleAnimation(){this.titleAnimationEnabled=!this.titleAnimationEnabled;this.refreshSettings();this.persistSettings();this.syncTitleMusic();},
+  titleAnimationError(){if(this.mode!=='title')return;this._titleAnimator.stop();this.titleAnimationEnabled=false;this.refreshSettings();console.log('STEINS2_RW5 title animation unavailable');},
+  toggleSound(){this.soundEnabled=!this.soundEnabled;if(this.soundEnabled){this.musicAvailable=true;this._music.retry();}this.refreshSettings();this.persistSettings();this.syncTitleMusic();},
+  persistSettings(){storage.set({complete:()=>{},key:'steins2_rw5_settings_v1',value:JSON.stringify({fontSize:this.fontSize,textSpeed:this.textSpeed,autoSpeed:this.autoSpeed,soundEnabled:this.soundEnabled,titleAnimationEnabled:this.titleAnimationEnabled}),success:()=>{},fail:()=>{}});},
   toggleSpeed(){this.textSpeed=this.textSpeed===0?30:0;this.refreshSettings();this.persistSettings();},
-  toggleFont(){this.fontSize=this.fontSize===24?28:24;this.fullText=wrapText(dialogueText(this.visibleText(this.session.text)),384,this.fontSize);this.dialogueHeight=this.fullText.split('\n').length*34+8;this.displayText=this.fullText;this.resetDialogueScroll();this.refreshSettings();this.persistSettings();},
-  toTitle(){if(this.storageBusy)return;this._renderPending=false;this._chapterSkip=null;this.syncProgress();this.writeProgress();this.clearTyping();this.loadSequence++;this._slotsSequence++;this._gallerySequence++;this.clearStoryCache();this._slotData=[];this._pendingSave=null;this.sceneImages=[];this.loading=false;this.mode='title';this.backgroundSrc='/common/title_bg.png';this.bodySrc='';this.bodySecond='';this.bodyThird='';if(!this._progressReady)this.readProgress();},
+  toggleFont(){this.fontSize=this.fontSize===24?28:24;this.fullText=wrapText(dialogueText(this.visibleText(this.session.text)),384,this.fontSize);this.dialogueHeight=this.fullText.split('\n').length*34+8;this.setDisplayText(this.fullText);this.resetDialogueScroll();this.refreshSettings();this.persistSettings();},
+  toTitle(){if(this.storageBusy)return;this.autoEnabled=false;this.refreshSettings();this._renderPending=false;this._chapterSkip=null;this.syncProgress();this.writeProgress();this.clearTyping();this.loadSequence++;this._slotsSequence++;this._gallerySequence++;this.clearStoryCache();this._slotData=[];this._pendingSave=null;this.sceneImages=[];this.loading=false;this.mode='title';this.backgroundSrc='/common/title_bg.png';this.bodySrc='';this.bodySecond='';this.bodyThird='';if(!this._progressReady)this.readProgress();else this.syncTitleMusic();},
   toast(message){prompt.showToast({message,duration:1500,success:()=>{},fail:()=>{},complete:()=>{}});},
-  fail(message){this._renderPending=false;this._chapterSkip=null;this.clearTyping();this.loading=false;this.mode='error';this.errorText=message;console.error('STEINS_RW5 error',message);}
+  fail(message){if(this._music)this._music.stop();this.autoEnabled=false;this.refreshSettings();this._renderPending=false;this._chapterSkip=null;this.clearTyping();this.loading=false;this.mode='error';this.errorText=message;console.error('STEINS2_RW5 error',message);}
 }
 </script>
 <style>
 @font-face {font-family:sgoriginal;src:url('/common/sg-original.ttf');}
-.page{width:432px;height:514px;background-color:#0a111f;flex-direction:column;}
+.page{width:432px;height:514px;background-color:#141512;flex-direction:column;}
+.chapter-card{position:absolute;top:0px;left:0px;width:432px;height:514px;background-color:#000000;justify-content:center;align-items:center;}
+.chapter-card-image{width:432px;height:243px;object-fit:contain;}
 .art{position:absolute;top:0px;left:0px;width:432px;height:286px;justify-content:center;align-items:center;background-color:#000000;}
 .background{width:432px;height:286px;object-fit:contain;}
 .scene-viewport{position:absolute;left:0px;top:43px;width:432px;height:243px;overflow:hidden;}
 .scene-layer{position:absolute;object-fit:fill;}
 .body{position:absolute;top:0px;left:116px;width:200px;height:286px;object-fit:contain;}
 .title-panel,.dialogue-panel,.choice-panel,.end-panel{position:absolute;top:286px;left:0px;width:432px;height:228px;flex-direction:column;padding:12px 18px;}
-.title-text{font-size:26px;color:#f4f7ff;text-align:center;margin-bottom:2px;}
+.title-text{font-size:26px;color:#f0eee4;text-align:center;margin-bottom:2px;}
 .title-subtitle{font-size:16px;color:#8d9cae;text-align:center;margin-bottom:4px;}
-.title-action{height:27px;width:396px;margin-bottom:2px;color:#ffffff;background-color:#25445f;border-radius:10px;text-align:center;font-size:20px;}
-.game-title{font-size:28px;color:#f4f7ff;text-align:center;margin-bottom:4px;}
+.title-action{height:27px;width:396px;margin-bottom:2px;color:#ffffff;background-color:#303127;border-radius:0px;text-align:center;font-size:20px;}
+.game-title{font-size:28px;color:#f0eee4;text-align:center;margin-bottom:4px;}
 .subtitle{font-size:18px;color:#8d9cae;text-align:center;margin-bottom:8px;}
-.action{height:52px;width:396px;margin-bottom:6px;color:#ffffff;background-color:#25445f;border-radius:14px;text-align:center;font-size:24px;}
-.secondary{background-color:#192b3d;}
-.dialogue-panel{padding:0px;}
+.action{height:52px;width:396px;margin-bottom:6px;color:#ffffff;background-color:#303127;border-radius:0px;text-align:center;font-size:24px;}
+.secondary{background-color:#24251f;}
+.dialogue-panel{padding:0px;background-color:#141512;}
 .speaker-row{position:absolute;left:18px;top:12px;width:396px;height:30px;justify-content:space-between;align-items:center;}
-.speaker{width:222px;height:30px;font-size:23px;color:#9bdaed;}
-.chapter{width:174px;height:30px;font-size:16px;color:#72849b;text-align:right;}
-.dialogue-scroll{position:absolute;left:18px;top:48px;width:396px;height:128px;flex-direction:column;overflow:hidden;}
-.dialogue{width:384px;color:#f4f7ff;line-height:34px;flex-shrink:0;}
+.speaker{width:222px;height:30px;font-size:23px;color:#efaa42;}
+.chapter{width:174px;height:30px;font-size:16px;color:#a4a48e;text-align:right;}
+.dialogue-scroll{position:absolute;left:18px;top:48px;width:396px;height:128px;flex-direction:column;overflow:hidden;background-color:#141512;}
+.dialogue{width:384px;color:#f0eee4;line-height:34px;flex-shrink:0;lines:-1;background-color:#141512;}
 .toolbar{position:absolute;left:18px;top:178px;height:42px;width:396px;justify-content:space-between;align-items:center;}
-.tool{width:99px;font-size:18px;color:#b7cbdf;padding:8px;text-align:center;}
+.tool{width:99px;font-size:18px;color:#d1cbb6;padding:8px;text-align:center;}
 .choice-tag{font-size:17px;color:#d9bd87;text-align:center;margin-bottom:4px;}
 .choice-heading{height:134px;width:396px;flex-direction:column;}
 .mail-content{width:380px;flex-direction:column;flex-shrink:0;}
-.choice-title{width:380px;font-size:23px;line-height:30px;color:#b8dbe9;text-align:left;flex-shrink:0;}
-.choice{min-height:68px;width:396px;background-color:#25445f;border-radius:12px;flex-direction:column;justify-content:center;padding:8px;margin-bottom:6px;}
-.choice-role{font-size:15px;color:#9bbdd7;text-align:center;}
+.choice-title{width:380px;font-size:23px;line-height:30px;color:#e3e1cf;text-align:left;flex-shrink:0;}
+.choice{min-height:68px;width:396px;background-color:#303127;border-radius:0px;flex-direction:column;justify-content:center;padding:8px;margin-bottom:6px;}
+.choice-role{font-size:15px;color:#c3ac78;text-align:center;}
 .choice-content{width:380px;font-size:21px;line-height:25px;color:#ffffff;text-align:center;}
 .small-action{font-size:18px;color:#9bacc0;text-align:center;}
-.overlay{position:absolute;top:0px;left:0px;width:432px;height:514px;background-color:#0a111f;flex-direction:column;padding:22px 32px;}
+.overlay{position:absolute;top:0px;left:0px;width:432px;height:514px;background-color:#141512;flex-direction:column;padding:22px 32px;}
 .menu-title{height:36px;font-size:28px;color:#ffffff;text-align:center;margin-bottom:12px;}
-.menu-action{height:50px;font-size:22px;color:#d5e5f2;background-color:#172b3c;border-radius:12px;margin-bottom:8px;text-align:center;}
+.menu-action{height:50px;font-size:22px;color:#e3e1cf;background-color:#292b23;border-radius:0px;margin-bottom:8px;text-align:center;}
 .muted{color:#98aabd;}
-.full-panel{position:absolute;top:0px;left:0px;width:432px;height:514px;background-color:#0a111f;flex-direction:column;padding:16px 18px;}
+.full-panel{position:absolute;top:0px;left:0px;width:432px;height:514px;background-color:#141512;flex-direction:column;padding:16px 18px;}
 .panel-title{height:36px;font-size:28px;color:#ffffff;text-align:center;margin-bottom:4px;}
-.panel-subtitle{height:22px;font-size:16px;color:#93a8bc;text-align:center;margin-bottom:6px;}
+.panel-subtitle{height:22px;font-size:16px;color:#b8ac8b;text-align:center;margin-bottom:6px;}
 .slot-list{height:368px;width:396px;flex-direction:column;}
-.slot-card{height:84px;width:396px;margin-bottom:8px;padding:7px 12px;flex-direction:column;border-radius:12px;}
-.slot-title{height:26px;font-size:22px;color:#e5f0fa;}
-.slot-meta{height:19px;font-size:16px;color:#9ab2c7;}
-.slot-preview{height:22px;font-size:18px;color:#bfceda;}
+.slot-card{height:84px;width:396px;margin-bottom:8px;padding:7px 12px;flex-direction:column;border-radius:0px;}
+.slot-title{height:26px;font-size:22px;color:#eeeadd;}
+.slot-meta{height:19px;font-size:16px;color:#b8ac8b;}
+.slot-preview{height:22px;font-size:18px;color:#d1cbb6;}
 .pager{height:44px;width:396px;justify-content:space-between;align-items:center;}
-.pager-action{font-size:20px;color:#b7cbdf;padding:8px;}
+.pager-action{font-size:20px;color:#d1cbb6;padding:8px;}
 .gallery-row{height:184px;width:396px;justify-content:space-between;}
-.gallery-card{height:176px;width:192px;padding:6px;flex-direction:column;background-color:#142535;border-radius:12px;}
+.gallery-card{height:176px;width:192px;padding:6px;flex-direction:column;background-color:#24251f;border-radius:0px;}
 .gallery-thumb{height:116px;width:180px;object-fit:contain;background-color:#000000;}
-.gallery-caption{height:48px;width:180px;font-size:18px;line-height:22px;color:#d5e5f2;text-align:center;}
+.gallery-caption{height:48px;width:180px;font-size:18px;line-height:22px;color:#e3e1cf;text-align:center;}
 .cg-panel{position:absolute;top:0px;left:0px;width:432px;height:514px;flex-direction:column;background-color:#000000;}
 .cg-image{width:432px;height:432px;object-fit:contain;}
-.cg-caption{width:432px;height:28px;font-size:18px;color:#d5e5f2;text-align:center;}
-.cg-controls{width:432px;height:54px;padding:0px 10px;justify-content:space-between;align-items:center;background-color:#0a111f;}
-.confirm-text{font-size:24px;color:#d5e5f2;margin:30px 0px;}
+.cg-caption{width:432px;height:28px;font-size:18px;color:#e3e1cf;text-align:center;}
+.cg-controls{width:432px;height:54px;padding:0px 10px;justify-content:space-between;align-items:center;background-color:#141512;}
+.confirm-text{font-size:24px;color:#e3e1cf;margin:30px 0px;}
 .error-text{font-size:22px;color:#eab7b7;margin-bottom:30px;}
-.loading{position:absolute;top:234px;left:128px;width:176px;height:46px;text-align:center;font-size:23px;color:#ffffff;background-color:#253a50;border-radius:12px;}
-.choice-panel{top:0px;height:514px;background-color:#0a111f;padding:18px;}
+.loading{position:absolute;top:234px;left:128px;width:176px;height:46px;text-align:center;font-size:23px;color:#ffffff;background-color:#37392c;border-radius:0px;}
+.choice-panel{top:0px;height:514px;background-color:#141512;padding:18px;}
 .choice-list{width:396px;height:416px;flex-direction:column;}
-.full-choice{top:0px;height:514px;background-color:#0a111f;}
+.full-choice{top:0px;height:514px;background-color:#141512;}
 .choice-list{height:296px;width:396px;}
+.dialogue-content{width:396px;flex-direction:column;flex-shrink:0;background-color:#141512;}
+.dialogue-line{width:384px;height:34px;line-height:34px;flex-shrink:0;lines:1;color:#f0eee4;background-color:#141512;}
+.mail-lines{width:380px;flex-direction:column;flex-shrink:0;background-color:#141512;}
+.mail-line{width:380px;height:30px;font-size:23px;line-height:30px;flex-shrink:0;lines:1;color:#e3e1cf;background-color:#141512;}
+
+.title-panel{top:286px;height:228px;padding:9px 28px;background-color:#141512;}
+.title-entry{width:376px;height:48px;align-items:center;justify-content:flex-start;padding-left:10px;}
+.opening-page{position:absolute;left:0px;top:0px;width:432px;height:514px;background-color:#000000;}
+.opening-viewport{position:absolute;left:24px;top:149px;width:384px;height:216px;overflow:hidden;}
+.opening-sheet{position:absolute;top:0px;width:1536px;height:432px;object-fit:contain;}
+.title-machine-viewport{position:absolute;left:32px;top:24px;width:160px;height:160px;overflow:hidden;}
+.title-machine-sheet{position:absolute;top:0px;width:640px;height:160px;object-fit:fill;}
+.original-button{width:160px;height:32px;object-fit:contain;}
+.title-hint{font-size:17px;width:175px;color:#c3bfa8;text-align:left;padding-left:12px;}
+.overlay{padding:18px 24px;}
+.menu-title{height:36px;font-size:25px;text-align:left;color:#efa63c;margin-bottom:12px;}
+.menu-action{height:42px;min-height:42px;margin-bottom:5px;text-align:left;padding-left:14px;border-left-width:3px;border-left-color:#b58132;font-size:21px;}
+.panel-title{text-align:left;color:#efa63c;font-size:25px;}
+.panel-subtitle{text-align:left;color:#aaa894;}
+.slot-card{background-color:#24251f;border-left-width:3px;border-left-color:#a17c3b;}
+.choice{border-left-width:3px;border-left-color:#e49a2c;}
+.choice-role,.choice-content{text-align:left;}
+.choice-footer{height:32px;width:396px;justify-content:space-between;align-items:center;}
+.small-action{width:180px;text-align:center;color:#d1cbb6;font-size:18px;}
+.speaker-row{border-bottom-width:1px;border-bottom-color:#5a5949;}
+.tool{font-size:18px;color:#d8cba8;}
+.help-text{height:330px;width:384px;font-size:20px;line-height:33px;color:#e3e1cf;}
+.phone-panel{background-color:#141512;}
+.phone-body{height:368px;width:396px;flex-direction:column;background-color:#141512;}
+.phone-content{width:396px;flex-direction:column;flex-shrink:0;}
+.phone-card{width:396px;height:84px;min-height:84px;margin-bottom:6px;padding:10px 12px;background-color:#292b23;border-left-width:3px;border-left-color:#e49a2c;flex-direction:column;}
+.phone-card-title{height:30px;width:368px;font-size:22px;color:#eeeadd;lines:1;}
+.phone-card-meta{height:25px;width:368px;font-size:17px;color:#b9ac88;lines:1;}
+
+/* Keep headings inside the rounded watch display's safe area. */
+.panel-title,.panel-subtitle{padding-left:22px;padding-right:4px;}
+.menu-title{padding-left:16px;padding-right:4px;}
+.title-entry{padding-left:16px;}
+.title-instrument{position:absolute;left:222px;top:15px;width:178px;height:200px;}
+.instrument-ring{position:absolute;border-width:1px;border-color:#424337;background-color:transparent;}
+.outer-ring{left:13px;top:9px;width:136px;height:136px;border-radius:68px;}
+.middle-ring{left:29px;top:25px;width:104px;height:104px;border-radius:52px;}
+.inner-ring{left:49px;top:45px;width:64px;height:64px;border-radius:32px;border-color:#615b3c;}
+.instrument-axis{position:absolute;background-color:#4d4a35;}
+.axis-x{left:3px;top:77px;width:156px;height:1px;}
+.axis-y{left:81px;top:0px;width:1px;height:153px;}
+.instrument-code{position:absolute;left:10px;top:61px;width:145px;height:31px;font-size:26px;text-align:center;color:#c49342;background-color:#141512;}
+.instrument-caption{position:absolute;left:16px;top:116px;width:132px;height:18px;font-size:12px;color:#777663;text-align:center;}
+.instrument-rule{position:absolute;left:12px;top:160px;width:144px;height:1px;background-color:#777052;}
+.instrument-motto{position:absolute;left:4px;top:172px;width:160px;height:20px;font-size:15px;color:#9d9679;text-align:center;}
 </style>
 

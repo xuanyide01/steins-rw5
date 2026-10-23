@@ -1,0 +1,17 @@
+{
+  "version": "0.3.0",
+  "device": "REDMI Watch 5",
+  "feedbackDate": "2026-10-23",
+  "source": "Maintainer physical-device feedback in this conversation",
+  "verbatimFeedback": "测试通过，暂未发现重启等bug，上传github。",
+  "packageBytes": 24888769,
+  "packageSha256": "42d536922d3d6ac58680b7c583c227f52653e0aed13e3de0e5a93a77afa7f1a5",
+  "physicalTestPassed": true,
+  "rebootObservedInReportedTest": false,
+  "otherBugsReported": false,
+  "firmwareVersion": null,
+  "testDurationMinutes": null,
+  "physicalHeapMeasurements": null,
+  "scope": "Maintainer reports successful testing without observed reboots or other bugs. Exact duration, firmware and detailed coverage were not supplied; this is not an exhaustive compatibility or leak-free guarantee.",
+  "publicationChanges": "Documentation and hardware feedback only; tested application bytes unchanged."
+}

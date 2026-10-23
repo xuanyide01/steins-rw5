@@ -1,0 +1,9 @@
+{
+  "source": "Steam USRDIR/movie/1280x720/OP.bk2",
+  "sourceCue": "MAIN00.scs label20: SG00_01 then PlayMovie 32; Game.exe movie table 32=op.bk2",
+  "sourceSHA256": "c223b807c222f5fef1348d85379ed869cb8af1ffa649d2f22d64a6f16fd70a6a",
+  "sourceBytes": 99795216,
+  "sourceFrames": 2750,
+  "sourceFPS": 24.00003840006144,
+  "durationMilliseconds": 114583.15
+}

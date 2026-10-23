@@ -11,7 +11,7 @@ for name in z.namelist():
   assert z.read(name)==(root/'src'/name).read_bytes(),name
  if name.endswith(('.png','.jpg')):
   im=Image.open(io.BytesIO(z.read(name)));im.load();images+=1
-  assert im.width<=432 and im.height<=288,(name,im.size)
+  assert (im.size==(640,160) if name.startswith('common/title-machine/atlas') else im.size==(768,216) if name.startswith('common/opening/') else im.width<=432 and im.height<=288),(name,im.size)
 icon=Image.open(io.BytesIO(z.read('common/logo.png')));assert icon.size==(192,192) and icon.mode=='RGBA';assert all(icon.getpixel(q)[3]==0 for q in [(0,0),(191,0),(0,191),(191,191)])
 font=TTFont(io.BytesIO(z.read('common/sg-original.ttf'))).getBestCmap();default=TTFont(Path(sys.argv[1]) if len(sys.argv)>1 else root.parent/'clannad-probe/native-default-font.ttf').getBestCmap();strings=[]
 def visit(v):

@@ -1,33 +1,16 @@
-import {textFont,cleanText} from './text-font.js';
-import {catalog} from './catalog.js';
 import {checkpoint,restore,chapterTitle} from './engine.js';
+import {textFont,cleanText} from './text-font.js';
+import {worldlineFor} from './worldline.js';
 export const SLOT_COUNT=30;
-export const LEGACY_KEY='steins_rw5_save_v1';
-export function slotKey(index){
-  if(!Number.isInteger(index)||index<0||index>=SLOT_COUNT)throw new Error('存档栏位无效');
-  return 'steins_rw5_slot_v1_'+(index+1);
-}
-export function decodeSave(raw){
-  if(!raw)return null;
-  const saved=typeof raw==='string'?JSON.parse(raw):raw;
-  if(!saved||saved.version!==1)throw new Error('存档版本不兼容');
-  return {version:1,state:restore(saved.state),savedAt:saved.savedAt||0,sceneMode:saved.sceneMode||'play'};
-}
-export function createSave(state,sceneMode,savedAt){
-  return {version:1,state:checkpoint(state),sceneMode,savedAt};
-}
-// Only previews are kept for the list; the selected full save is read on demand.
-export function decodeSlotMeta(raw){if(!raw)return null;const saved=typeof raw==='string'?JSON.parse(raw):raw;if(!saved||saved.version!==1||!saved.state||!catalog.scenes[saved.state.rootChapter||saved.state.chapter])throw Error('存档无效');return {version:1,savedAt:saved.savedAt||0,sceneMode:saved.sceneMode||'play',state:{chapter:saved.state.chapter,rootChapter:saved.state.rootChapter,cursor:saved.state.cursor,text:saved.state.text||'',letters:{334:(saved.state.letters||{})[334]||0}}};}
-function two(n){return n<10?'0'+n:String(n);}
+export const LEGACY_KEY='steins2_rw5_unused_legacy';
+export function slotKey(index){if(!Number.isInteger(index)||index<0||index>=30)throw Error('栏位无效');return 'steins2_rw5_slot_v2_'+(index+1);}
+export function decodeSave(raw){if(!raw)return null;const s=JSON.parse(raw);if(s.version!==2)throw Error('存档版本不兼容');return {version:2,state:restore(s.state),savedAt:s.savedAt,sceneMode:s.sceneMode};}
+export function createSave(state,sceneMode,savedAt){return {version:2,state:checkpoint(state),sceneMode,savedAt};}
+export function decodeSlotMeta(raw){if(!raw)return null;const s=decodeSave(raw);return {version:2,state:{title:s.state.title,text:s.state.text,worldline:worldlineFor(s.state)},savedAt:s.savedAt,sceneMode:s.sceneMode};}
+function two(i){return ('0'+i).slice(-2);}
 export function slotRow(index,saved){
-  const row={index,number:index+1,title:'存档 '+two(index+1),meta:'空栏位',preview:'',occupied:!!saved,metaFont:'sans-serif',previewFont:'sans-serif'};
-  if(!saved)return row;
-  if(saved.invalid){row.meta='存档无法读取';row.preview='可以选择其他栏位';return row;}
-  let date='';
-  if(saved.savedAt){const d=new Date(saved.savedAt);date=two(d.getMonth()+1)+'/'+two(d.getDate())+' '+two(d.getHours())+':'+two(d.getMinutes());}
-  row.meta=(saved.legacy?'旧版存档 · ':'')+chapterTitle(saved.state)+(date?' · '+date:'');
-  const preview=saved.sceneMode==='choice'?'正在选择下一步':(saved.state.text||'章节开头');
-  row.preview=cleanText(preview).replace(/・/g,'·').replace(/\s+/g,' ').slice(0,20)+(preview.length>20?'…':'');
-  row.metaFont=textFont(row.meta);row.previewFont=textFont(row.preview);
-  return row;
+ const row={index,number:index+1,title:'存档 '+two(index+1),meta:'空栏位',preview:'',occupied:!!saved,metaFont:'sans-serif',previewFont:'sans-serif'};
+ if(!saved)return row;if(saved.invalid){row.meta='存档无法读取';return row;}
+ const d=new Date(saved.savedAt);row.meta=chapterTitle(saved.state)+' · '+two(d.getMonth()+1)+'/'+two(d.getDate())+' '+two(d.getHours())+':'+two(d.getMinutes());
+ row.preview=saved.sceneMode==='choice'?'正在选择关键剧情操作':cleanText(saved.state.text||'章节开头').slice(0,24);row.metaFont=textFont(row.meta);row.previewFont=textFont(row.preview);return row;
 }

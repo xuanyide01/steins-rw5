@@ -1,0 +1,36 @@
+{
+  "result": "passed",
+  "version": "0.3.0",
+  "sha256": "42d536922d3d6ac58680b7c583c227f52653e0aed13e3de0e5a93a77afa7f1a5",
+  "prologueSkipStopsAtOpening": true,
+  "mutedOpeningRuns": true,
+  "tapSkipThenOriginalChapter1Card": true,
+  "naturalEndThenOriginalChapter1Card": true,
+  "firstDialogueCursorUnchanged": 557,
+  "nativeElapsedMilliseconds": 114626,
+  "nativeOpeningAudio": {
+    "playing": true,
+    "track": "opening",
+    "loop": false,
+    "revision": 5,
+    "position": 0.471,
+    "duration": 114.625,
+    "updatedAt": 1792674942893,
+    "backend": "browser",
+    "hostAudioDisabled": true
+  },
+  "audioRangeRequest": true,
+  "originalDurationMilliseconds": 114583.15,
+  "volumeOffBeforeColdStart": true,
+  "extraTapReturnsWithoutChangingStory": true,
+  "extraNaturalReturnsWithoutChangingStory": true,
+  "extraElapsedMilliseconds": 114392,
+  "physicalDeviceTested": false,
+  "coldStart": true,
+  "slotsRestored": [
+    1,
+    30,
+    23
+  ],
+  "gameVolumeSurvivesColdStart": true
+}

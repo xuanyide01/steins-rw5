@@ -1,4 +1,0 @@
-- pattern: FE
-  name: Eval
-  operands: [expr]
-  flags: []

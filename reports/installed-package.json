@@ -1,0 +1,18 @@
+{
+  "result": "passed",
+  "sha256": "42d536922d3d6ac58680b7c583c227f52653e0aed13e3de0e5a93a77afa7f1a5",
+  "installedFilesMatchPackage": [
+    "pages/index/index.js",
+    "manifest-watch.json",
+    "common/graph.txt",
+    "common/story/04/37.txt",
+    "common/sg-original.ttf",
+    "common/logo.png",
+    "common/title-piano.wav",
+    "common/title-machine/atlas00.png",
+    "common/title-machine/atlas74.png",
+    "common/opening/000.jpg",
+    "common/opening/171.jpg",
+    "common/opening/op.mp3"
+  ]
+}

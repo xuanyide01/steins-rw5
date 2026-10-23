@@ -1,0 +1,197 @@
+{
+  "result": "passed",
+  "windows": [
+    {
+      "node": "n19",
+      "source": "SG08_12",
+      "limit": 8,
+      "rejoin": 1,
+      "lateInputsCompared": 8,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n9",
+      "source": "SG07_13",
+      "limit": 16,
+      "rejoin": 1,
+      "lateInputsCompared": 16,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n3",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n21",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n236",
+      "source": "SG08_12",
+      "limit": 8,
+      "rejoin": 1,
+      "lateInputsCompared": 8,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n222",
+      "source": "SG07_13",
+      "limit": 16,
+      "rejoin": 1,
+      "lateInputsCompared": 16,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n279",
+      "source": "SG08_12",
+      "limit": 8,
+      "rejoin": 1,
+      "lateInputsCompared": 8,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n276",
+      "source": "SG08_12",
+      "limit": 8,
+      "rejoin": 1,
+      "lateInputsCompared": 8,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n266",
+      "source": "SG08_12",
+      "limit": 8,
+      "rejoin": 1,
+      "lateInputsCompared": 8,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n260",
+      "source": "SG08_12",
+      "limit": 8,
+      "rejoin": 1,
+      "lateInputsCompared": 8,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n250",
+      "source": "SG07_13",
+      "limit": 16,
+      "rejoin": 1,
+      "lateInputsCompared": 16,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n241",
+      "source": "SG07_13",
+      "limit": 16,
+      "rejoin": 1,
+      "lateInputsCompared": 16,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n200",
+      "source": "SG07_13",
+      "limit": 16,
+      "rejoin": 1,
+      "lateInputsCompared": 16,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n187",
+      "source": "SG07_13",
+      "limit": 16,
+      "rejoin": 1,
+      "lateInputsCompared": 16,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n173",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n174",
+      "source": "SG07_13",
+      "limit": 16,
+      "rejoin": 1,
+      "lateInputsCompared": 16,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n166",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n149",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n142",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n115",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n106",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n86",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n67",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    },
+    {
+      "node": "n49",
+      "source": "SG06_23",
+      "limit": 22,
+      "rejoin": 1,
+      "lateInputsCompared": 22,
+      "recordsComparedPerInput": 32
+    }
+  ]
+}

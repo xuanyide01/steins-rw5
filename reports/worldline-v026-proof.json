@@ -1,0 +1,29 @@
+{
+  "result": "passed",
+  "originalDeleteInstructions": 76768,
+  "originalReadAndReplyBitInstructions": 161,
+  "nodes": 74,
+  "eventPacks": 10,
+  "maxReadBytes": 15923,
+  "originalMovieRates": {
+    "7": "0.571024",
+    "11": "0.571015",
+    "12": "0.523299",
+    "13": "0.456903",
+    "14": "0.409420",
+    "15": "0.337187",
+    "16": "0.409431",
+    "17": "0.456914",
+    "18": "0.523307",
+    "19": "0.571046",
+    "21": "1.130205",
+    "22": "1.130238",
+    "24": "-0.275349"
+  },
+  "initialWorldline": "1.130426",
+  "trueWorldline": "1.048596",
+  "numberEvidence": "artwork/v026/worldline-settled-contact.png (original 1280x720 Bink frame 125); first beta: inspect-7-35.png",
+  "trueWorldlineEvidence": "https://us.super-groupies.com/collections/steins-gate/products/okabe-rintaro-model-watch-steins-gate",
+  "trueWorldlineEntry": "First original SG11_08 hospital frame after successful operation; permanent title lock only after actual True End",
+  "legacyMigration": "Filter existing mail using original erase/acquire events and possible reply descendants; no new mail synthesized by migration"
+}

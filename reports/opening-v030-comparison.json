@@ -1,0 +1,23 @@
+{
+  "result": "passed",
+  "comparison": {
+    "original12fps": {
+      "samples": 120,
+      "elapsedMs": 5404.759399999999,
+      "pixelChanges": 64,
+      "observedPixelChangesPerSecond": 11.841415179369504,
+      "p95SamePictureMs": 106.51449999999967,
+      "maxSamePictureMs": 143.06500000000233
+    },
+    "optimized12fps": {
+      "samples": 120,
+      "elapsedMs": 5445.9326,
+      "pixelChanges": 65,
+      "observedPixelChangesPerSecond": 11.935513120379051,
+      "p95SamePictureMs": 115.98645000000033,
+      "maxSamePictureMs": 181.44560000000274
+    }
+  },
+  "method": "Exact RGB pixel hashes of visible movie crop in 120 consecutive HTTP captures, same moving OP segment. Captures are throughput-limited and were collected in separate sessions. These are desktop observations, not physical-watch FPS or a controlled hardware benchmark.",
+  "requiresPhysicalSmoothnessReview": true
+}

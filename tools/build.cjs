@@ -11,10 +11,13 @@ const {compile}=require(path.join(toolkit,'lib/commands/compile'));
  const result=await compile('native',process.argv.includes('--development')?'dev':'prod',false,{signMode:'BUILD'});
  if(result.compileError||result.stats.hasErrors())throw Error('Compatible compiler failed');
  const watchManifest=path.resolve('build/manifest-watch.json');
- if(!fs.existsSync(watchManifest)||JSON.parse(fs.readFileSync(watchManifest,'utf8')).package!=='com.codex.steins.rw5')throw Error('Watch-specific manifest was not generated correctly');
+ if(!fs.existsSync(watchManifest)||JSON.parse(fs.readFileSync(watchManifest,'utf8')).package!=='com.codex.steins2.rw5')throw Error('Watch-specific manifest was not generated correctly');
  const manifest=JSON.parse(fs.readFileSync('src/manifest.json','utf8'));
  const name=manifest.package+'.debug.'+manifest.versionName+'.rpk',file=path.join('dist',name);
  if(!fs.existsSync(file))throw Error('Current-version package was not produced');
+ // Default to the DEFLATE pipeline of the physically installable 0.1.4.
+ // 0.2.1's STORE experiment did not resolve the physical installation failure.
+ if(process.argv.includes('--store-images'))await require('./store-native-images.cjs')(file,toolkit);
  // Use the release wrapping that resolved the earlier Summer Pockets install issue.
  const packaging=await require('./repack-rpk.cjs').repackRpk(file,file,toolkit);
  console.log('R1_PACKAGING',JSON.stringify(packaging));

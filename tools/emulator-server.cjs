@@ -4,9 +4,10 @@ const exec=promisify(execFile);
 const {VvdManager}=require('@aiot-toolkit/emulator');
 const {getRunningAvdConfigByName}=require('@aiot-toolkit/emulator/lib/emulatorutil/running');
 const {createGrpcClient}=require('@aiot-toolkit/emulator/lib/vvd/grpc');
-const environment=process.env.STARRY_EMULATOR_HOME || path.resolve(__dirname,'../../steins-environment');
+const audioMonitor=require('./emulator-audio.cjs').makeAudioMonitor();
+const environment=process.env.STARRY_EMULATOR_HOME || path.resolve(__dirname,'../../steins-rebuild-environment');
 const manager=new VvdManager({sdkHome:process.env.WATCH_SDK_HOME||path.join(environment,'sdk'),vvdHome:path.join(environment,'vvd')});
-const name=process.env.WATCH_VVD_NAME||'SteinsRW5-432x514';
+const name=process.env.WATCH_VVD_NAME||'SteinsRebuildRW5-432x514';
 process.env.ANDROID_AVD_HOME=manager.vvdHome;
 process.env.ANDROID_EMULATOR_HOME=environment;
 process.env.ANDROID_SDK_ROOT=manager.sdkHome;
@@ -14,10 +15,10 @@ process.env.CI='1';
 let agent,child,server,bootReady=false,bootLog='';
 fs.writeFileSync(path.join(environment,'controller-pid.json'),JSON.stringify({pid:process.pid,script:__filename}));
 const log=fs.createWriteStream(path.join(environment,'emulator.log'),{flags:'a'});
-const packageName=process.env.STARRY_EMULATOR_PACKAGE||'com.codex.steins.rw5';
+const packageName=process.env.STARRY_EMULATOR_PACKAGE||'com.codex.steins2.rw5';
 const adb=process.env.WATCH_ADB_PATH||path.resolve(path.dirname(require.resolve('@miwt/adb')),'../bin/win/adb.exe');
 async function adbCmd(...args){const r=await exec(adb,['-s','emulator-5556',...args],{windowsHide:true,timeout:240000,maxBuffer:1024*1024*8});return r.stdout;}
-async function connect(){if(agent)return agent;const conf=getRunningAvdConfigByName(name);if(!conf)throw new Error('Emulator is not registered yet');agent=createGrpcClient(conf);await agent.waitForReady();return agent;}
+async function connect(){if(!agent){const conf=getRunningAvdConfigByName(name);if(!conf)throw new Error('Emulator is not registered yet');agent=createGrpcClient(conf);}await agent.waitForReady();return agent;}
 // SDK getScreenshot dereferences response even after an RPC error. Return the
 // error without that dereference so a browser polling during boot cannot crash us.
 function screenshot(a){return new Promise((resolve,reject)=>a.client.getScreenshot(a.controller.Image,a.authMate,(error,response)=>{
@@ -32,16 +33,20 @@ async function startApp(){await adbCmd('wait-for-device');for(let n=0;n<80;n++){
   const args=cmd.split(' ').filter(Boolean);let binary=args.shift();if(!binary.endsWith('.exe'))binary+='.exe';
   const portIndex=args.indexOf('-port');if(portIndex>=0)args.splice(portIndex+1,0,'5556');
   const qemuIndex=args.indexOf('-qemu');
-  args.splice(qemuIndex<0?args.length:qemuIndex,0,'-memory','128');
+  args.splice(qemuIndex<0?args.length:qemuIndex,0,'-memory','128','-audio','none');
+  fs.writeFileSync(path.join(environment,'audio-preview.json'),JSON.stringify({hostAudio:'none',previewAudio:'browser',gameAudioUnchanged:true,args}));
   console.log('STARTING',name);
-  child=spawn(binary,args,{cwd:manager.sdkHome,windowsHide:true,stdio:'pipe',env:process.env});
-  function record(x){log.write(x);bootLog=(bootLog+x.toString()).slice(-4096);if(bootLog.includes('NuttShell (NSH)'))bootReady=true;}
+  child=spawn(binary,args,{cwd:manager.sdkHome,windowsHide:true,stdio:'pipe',env:{...process.env,QEMU_AUDIO_DRV:'none'}});
+  function record(x){log.write(x);audioMonitor.feed(x.toString());bootLog=(bootLog+x.toString()).slice(-4096);if(bootLog.includes('NuttShell (NSH)'))bootReady=true;}
   child.stdout.on('data',record);child.stderr.on('data',x=>{record(x);if(/ERROR|PANIC/i.test(x))console.log(x.toString().slice(0,700));});
   child.on('exit',code=>{console.log('EMULATOR_EXIT',code);server?.close();log.end();setTimeout(()=>process.exit(code||0),300);});
   server=http.createServer(async(req,res)=>{
     try{
       const url=new URL(req.url,'http://127.0.0.1');let result;
       if(url.pathname==='/'){res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'});res.end(fs.readFileSync(path.join(__dirname,'emulator-view.html')));return;}
+      if(url.pathname==='/emulator-audio-client.js'){res.writeHead(200,{'Content-Type':'application/javascript'});res.end(fs.readFileSync(path.join(__dirname,'emulator-audio-client.js')));return;}
+      if(url.pathname==='/audio-state'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify({...audioMonitor.get(),backend:'browser',hostAudioDisabled:true}));return;}
+      if(url.pathname==='/title-audio.mp3'||url.pathname==='/title-audio.wav'||url.pathname==='/opening-audio.mp3'){const p=path.resolve(__dirname,url.pathname==='/opening-audio.mp3'?'../src/common/opening/op.mp3':'../src/common/title-piano.wav'),size=fs.statSync(p).size,range=req.headers.range,m=range&&range.match(/^bytes=(\d+)-(\d*)$/);let start=0,end=size-1;if(range&&!m){res.writeHead(416,{'Content-Range':'bytes */'+size});res.end();return;}if(m){start=Number(m[1]);end=m[2]?Math.min(Number(m[2]),end):end;}if(start>end||start>=size){res.writeHead(416,{'Content-Range':'bytes */'+size});res.end();return;}const headers={'Content-Type':url.pathname==='/opening-audio.mp3'?'audio/mpeg':'audio/wav','Content-Length':end-start+1,'Accept-Ranges':'bytes'};if(m)headers['Content-Range']='bytes '+start+'-'+end+'/'+size;res.writeHead(m?206:200,headers);fs.createReadStream(p,{start,end}).pipe(res);return;}
       if(url.pathname==='/screen'){if(!bootReady){res.writeHead(503,{'Content-Type':'application/json'});res.end(JSON.stringify({error:'模拟器正在启动，请稍候'}));return;}const a=await connect();const data=await screenshot(a);res.writeHead(200,{'Content-Type':'image/png'});res.end(data);return;}
       if(url.pathname==='/click'){const a=await connect();const x=Number(url.searchParams.get('x')),y=Number(url.searchParams.get('y'));a.sendMouse({x,y,buttons:1});await new Promise(r=>setTimeout(r,90));a.sendMouse({x,y,buttons:0});result='clicked';}
       else if(url.pathname==='/drag'){
@@ -59,7 +64,7 @@ async function startApp(){await adbCmd('wait-for-device');for(let n=0;n<80;n++){
       res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify(result));
     }catch(e){res.writeHead(500,{'Content-Type':'application/json'});res.end(JSON.stringify({error:e.message||String(e)}));}
   });
-  server.listen(43130,'127.0.0.1',()=>console.log('CONTROL http://127.0.0.1:43130'));
+  server.listen(43140,'127.0.0.1',()=>console.log('CONTROL http://127.0.0.1:43140'));
   process.on('SIGINT',()=>{child.kill();server.close();process.exit();});
 })().catch(e=>{console.error(e);process.exitCode=1;});
 

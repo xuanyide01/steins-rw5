@@ -1,0 +1,9 @@
+{
+  "result": "passed",
+  "packageSHA256": "42d536922d3d6ac58680b7c583c227f52653e0aed13e3de0e5a93a77afa7f1a5",
+  "beforeDF": "  Block    Number\r\n  Size     Blocks       Used   Available Mounted on\r\n     0          0          0           0 /bin\r\n 32768       8189       5507        2682 /data\r\n    64      11658      11658           0 /etc\r\n     0          0          0           0 /host\r\n     0          0          0           0 /proc\r\n   512      89856      89856           0 /system\r\n   512         23          3          20 /tmp\r\n",
+  "afterDF": "  Block    Number\r\n  Size     Blocks       Used   Available Mounted on\r\n     0          0          0           0 /bin\r\n 32768       8189       5462        2727 /data\r\n    64      11658      11658           0 /etc\r\n     0          0          0           0 /host\r\n     0          0          0           0 /proc\r\n   512      89856      89856           0 /system\r\n   512         23          3          20 /tmp\r\n",
+  "temporarySDKFontBackupRestored": true,
+  "fontSHA256": "9dd76f7ab430edd091db24c3f18e71410325c1414141aad5fe67947873ffba06",
+  "realWatchModified": false
+}

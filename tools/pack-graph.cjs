@@ -1,0 +1,12 @@
+// Finalize desktop graph into bounded watch chunks and precomputed skip boundaries.
+const fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'..'),common=path.join(root,'src/common');
+const graph=JSON.parse(fs.readFileSync(path.join(common,'graph.txt'))),visuals=JSON.parse(fs.readFileSync(path.join(common,'visuals.txt')));
+let maxBytes=0,maxLayers=0;
+const referenced=new Set(Object.values(graph.nodes).flatMap(n=>n.chunks.map(c=>c.file)));
+for(const file of referenced){const p=path.join(common,'story',file),frames=JSON.parse(fs.readFileSync(path.join(root,'reports/raw-story',file))),views=[],map=new Map();for(const row of frames){const id=row[2];if(!map.has(id)){map.set(id,views.length);views.push(visuals[id]);}row[2]=map.get(id);}const text=JSON.stringify({frames,views});fs.writeFileSync(p,text);maxBytes=Math.max(maxBytes,Buffer.byteLength(text));for(const view of views)maxLayers=Math.max(maxLayers,view.length);}
+for(const file of fs.readdirSync(path.join(common,'story')))if(!referenced.has(file)){const out=path.join(root,'reports/obsolete-story');fs.mkdirSync(out,{recursive:true});fs.renameSync(path.join(common,'story',file),path.join(out,file));}
+for(const node of Object.values(graph.nodes)){let offset=0,last='';node.breaks=[];for(const chunk of node.chunks){const {frames}=JSON.parse(fs.readFileSync(path.join(common,'story',chunk.file)));for(const row of frames){if(row[4]!==last){node.breaks.push([offset,row[4]]);last=row[4];}offset++;}}if(node.choice&&node.choice.category==='关键剧情操作'&&['phone','dmail'].includes(node.choice.kind))node.choice.category='关键电话／D-Mail';}
+const source=path.join(process.env.STEINS_REFERENCE_ROOT||path.resolve(root,'../steins-rw5'),'src/common'),mail=JSON.parse(fs.readFileSync(path.join(source,'mail.txt')));fs.mkdirSync(path.join(common,'mail'),{recursive:true});graph.messages={};
+for(const id of graph.retainedMail){const m=mail[id];graph.messages[id]={title:m.title,sender:m.sender};fs.writeFileSync(path.join(common,'mail',id+'.txt'),JSON.stringify({sender:m.sender,title:m.title,text:m.text}));}
+fs.writeFileSync(path.join(common,'graph.txt'),JSON.stringify(graph));fs.renameSync(path.join(common,'visuals.txt'),path.join(root,'reports/compiler-visuals.json'));
+fs.writeFileSync(path.join(root,'reports/runtime-resources.json'),JSON.stringify({maxChunkBytes:maxBytes,maxLayers,graphBytes:fs.statSync(path.join(common,'graph.txt')).size,watchRunsOriginalVM:false,singleCachedChunk:true},null,2));console.log('PACKED',maxBytes,maxLayers);
