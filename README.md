@@ -1,67 +1,27 @@
-# 《命运石之门》REDMI Watch 5 场景重制版
+<!-- codex-version-index:start -->
+## 版本目录（设备内按版本号从新到旧）
 
-作者 xuanyide。Codex完成转换、运行代码、界面与检查；维护者提供原作资源、需求及实机反馈。原作资源只读，旧安装包和存档保留。
+| 版本 | 设备 |
+| --- | --- |
+| [v0.3.0](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.3.0) | REDMI Watch 5 |
+| [v0.2.9](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.9) | REDMI Watch 5 |
+| [v0.2.8](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.8) | REDMI Watch 5 |
+| [v0.2.7](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.7) | REDMI Watch 5 |
+| [v0.2.6](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.6) | REDMI Watch 5 |
+| [v0.2.5](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.5) | REDMI Watch 5 |
+| [v0.2.4](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.4) | REDMI Watch 5 |
+| [v0.2.3](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.3) | REDMI Watch 5 |
+| [v0.2.2](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.2) | REDMI Watch 5 |
+| [v0.2.1](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.1) | REDMI Watch 5 |
+| [v0.2.0](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.2.0) | REDMI Watch 5 |
+| [v0.1.4](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.1.4) | REDMI Watch 5 |
+| [v0.1.3](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.1.3) | REDMI Watch 5 |
+| [v0.1.2](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.1.2) | REDMI Watch 5 |
+| [v0.1.1](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.1.1) | REDMI Watch 5 |
+| [v0.1.0](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.1.0) | REDMI Watch 5 |
 
-> 一切都是命运石之门的选择  
-> El Psy Kongroo
+<!-- codex-version-index:end -->
 
-## 0.3.0
+# 历史文件归档索引
 
-安装包 24,888,769 字节（约24.89MB，低于25,000,000字节）。版本代码12，包名com.codex.steins2.rw5。SHA-256：`42d536922d3d6ac58680b7c583c227f52653e0aed13e3de0e5a93a77afa7f1a5`。
-
-**实机反馈（2026-10-23）**：维护者在REDMI Watch 5测试通过，暂未发现重启等bug。原话：“测试通过，暂未发现重启等bug，上传github。”本次公开的安装包与通过测试的0.3.0逐字节一致；仅更新文档和实机反馈记录，未改动游戏代码或安装包。具体测试时长、固件版本及覆盖范围未提供，不据此承诺所有设备永久无故障。记录见[HARDWARE_TEST.json](HARDWARE_TEST.json)。
-
-下载：[0.3.0 Release](https://github.com/xuanyide01/steins-rw5/releases/tag/v0.3.0)。旧0.1.4实验版及其性能分析保留在历史Release，当前版本已改用轻量场景阅读器。
-
-0.2.9在模拟器循环正常，但维护者实机报告标题曲循环时变成噪声并重启，因此不能把此前模拟器结果当成修复成功。本版针对这条路径重新处理音频生命周期，并恢复较低负载的12帧OP。
-
-- **标题音乐**：同一首《Gate of Steiner - Piano -》改为8kHz、16位单声道PCM WAV流式播放，绕开MP3解码器；音色高频会比旧版减少。保留约232.08秒原曲，最后120毫秒淡出，文件末尾另附两秒静音保护。原曲结束时主动stop，约1.2秒后再播放，既不使用native loop，也不依赖自然EOF事件重播。循环间有短暂停顿。
-- **资源释放**：修复迟到的停止回调可能把新播放器误标为已停止、继而跳过清理的问题。用独立占用状态跟踪原生播放器，取消旧定时器并校验代次；隐藏、离开允许页面、静音和销毁均释放。若意外提前收到标题EOF或音频错误，停止自动重播，正文仍可继续。重播边界短暂停止并移除标题动画图片，播放器重新开始后恢复，不更改动画开关。
-- **12帧OP**：保留约114.58秒时长，从原片每两帧取一帧，共1,375帧；192×108 JPEG画面等比显示为384×216，四周黑边，完整居中。改成八帧4×2小图集，共172张768×216；只使用一个图片组件，去除双图片预载。单张图集RGBA像素663,552字节，0.2.8为1,806,336字节；这是像素数据估算，不是应用峰值内存。JPEG质量18以满足25MB限制，精细度低于原片。
-- **OP功能保留**：序章跳章停在OP；点击跳过或自然结束后接原第一章487标题CG，再从同一首句557开始。EXTRA的OP MOVIE独立观看，结束返回，不修改路线或序章标记。后台暂停，游戏音量统一控制标题和OP。
-- **不再额外导出视频**：按维护者最新要求，仅输出应用、源码、说明及检查文件，不新建独立OP视频或音轨文件。以前已输出的文件保留。
-
-## 内存检查与验证范围
-
-50项行为检查通过，包括1,000次模拟时钟下的重播循环，定时器数量有界，隐藏和销毁后清空，以及迟到停止回调、意外EOF、OP离开后的播放器释放。这里的1,000次是逻辑测试，不是1,000次实机音乐播放。
-
-官方Vela watch5.0模拟器（432×514、128MB）实际完成两次定时停止并进入第三遍，间隔约1.226／1.232秒；没有自然EOF、应用重启或panic，标题动画恢复。约六分钟36次系统堆采样：初始窗口中位数12,160,448B，末段12,170,232B，差9,784B；未观察到逐轮明显增长。采样是整个模拟系统的堆，包含SDK等开销，不是实机应用堆或“不存在任何泄漏”的证明。SDK内部的空回调诊断仍存在，不能声称消除固件问题。
-
-安装包签名、CRC、1,335张图片解码及字形覆盖通过，准确SHA安装后已拉取核对代码、图标、字库、剧情、音频和首尾图集。原剧情引擎、graph、图片、字库、世界线和邮件数据逐字节不变，沿用0.2.8的六路线137,178条阅读帧／136,841个邮件与数值检查点证据。本版新增原生OP和冷启动结果见随附检查报告；维护者随后确认实机测试通过，暂未发现重启等bug。未取得此前真实手表固件崩溃栈，不能由此认定已证明唯一根因或所有固件的稳定性。
-
-## 保留功能与存档
-
-保留30栏存读档、正文点击推进、长文滚动、多档逐字和自动播放、关键邮件及电话原作回复窗口、萌郁剧情邮件、随世界线消失的收发邮件、动态联系人、章节标题CG、章节选择、CG分组鉴赏与差分切换、圆形图标与R角边距。下一章遇影响路线的选择与OP会停，不代选。
-
-沿用0.2.x的存档键和结构，覆盖升级保留原栏位；旧第一章以后的档不重播OP，序章档仍会在原位置遇到OP。章节选择适合浏览，完整攻略建议START或流程档。旧0.1.4解释器存档不兼容。标题仍使用原299帧时间机器，按键仅START／LOAD／EXTRA／CONFIG图标区域响应。15个世界线数值及剧情见[WORLDLINES.md](WORLDLINES.md)，真结局实际完成后固定1.048596。
-
-## 安装与故障处理
-
-使用[表盘自定义工具](https://www.bandbbs.cn/)安装BIN，手机传输完成后仍需等待手表解包、登记图标。优先覆盖升级，保留旧包；卸载或恢复出厂可能清除存档。
-
-目前维护者实机测试暂未复现重启。若后续仍出现声音卡住或噪音，先用系统返回离开应用，再重启手表；重新进入后在CONFIG关闭“游戏音量”，必要时关闭“标题动画”，可继续阅读。请记录固件、版本、是否发生在第一次循环及是否关闭动画。若关闭游戏音量也重启，需进一步区分图片／运行时问题，不能只归因于音频。
-
-开发SDK重复覆盖需要安装临时空间，曾备份移出未用SDK字体、安装后原样恢复，未清档或改变真实手表；这不是实机安装步骤。
-
-## 构建与证据
-
-已转换资源完整保存在src，正常构建不需要原游戏、RAD或FFmpeg。使用Node.js及aiot-toolkit@1.1.0：
-
-```powershell
-npm install --prefix tools/compat-toolkit --ignore-scripts aiot-toolkit@1.1.0
-$env:WATCH_COMPAT_TOOLKIT = (Resolve-Path tools/compat-toolkit/node_modules/aiot-toolkit).Path
-node --test tests/*.test.cjs
-node tools/build.cjs
-```
-
-媒体重新转换脚本为tools/prepare-media-v030.py，需要工作区已有的原作解码帧及BGM03.ogg；原片保持只读。源码归档省略原片、raw/WAV中间文件、外部运行时、SDK字体及旧版发布／界面重写／原生验收脚本，保留当前构建资源、转换脚本、测试、许可和JSON证据。reports/media-v030-source.json记录准确音频及图集摘要；native-test-results/v030/memory-loops.json记录采样；reports/final-v030-proof.json及原生report.json汇总验证。不要运行历史UI重写脚本覆盖当前页面。
-
-## 致谢与许可
-
-方法参考本系列《ATRI》《星之终途》《anemoi》《eden》的场景预计算、单块读取及原生图片显示。借鉴[@liuyuze61的《ATRI》](https://api.bandbbs.cn/wftools/bandbbs.html?code=A&state=1820673)与[《星空列车与白的旅行》](https://api.bandbbs.cn/wftools/bandbbs.html?code=A&state=1841662)移植作品，感谢[表盘自定义工具团队](https://www.bandbbs.cn/)。资源读取参考Committee of Zero的MgsScriptTools、sc3tools、impacto及sg-sprite，许可副本见tools/licenses与THIRD_PARTY_NOTICES.md。
-
-自编代码采用MIT；原作剧情、美术、音频及衍生字库归原权利人，不适用MIT。
-
-## 联系方式
-
-问题反馈与交流：[shining237841@gmail.com](mailto:shining237841@gmail.com)。
+此提交只记录历史交付文件清单，不是某个旧版程序的源码树。请在对应 Release 下载历史 ZIP；实际源码 ZIP、安装包与 SHA-256 清单均保留在附件内。

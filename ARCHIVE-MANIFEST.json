@@ -1,0 +1,526 @@
+{
+  "archived_at": "2026-11-01",
+  "repository": "xuanyide01/steins-rw5",
+  "versions": [
+    {
+      "tag": "v0.1.0",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.0-测试说明.md",
+          "bytes": 1641,
+          "sha256": "e21e8152ddaea2fd28b49bb53b42fa2e0a2db8f2d8936ac256102daf22c5af10"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.0-源码.zip",
+          "bytes": 18122718,
+          "sha256": "daacd6d996a06f768602d69be24d4813783e886b5c28e6caeaf2fb6601f12b0d"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.0.bin",
+          "bytes": 16902513,
+          "sha256": "4c7740a1925085afdd3d3dfb3f31900ea4c22cce367c9a417bb3e96dde517461"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.0.rpk",
+          "bytes": 16902513,
+          "sha256": "4c7740a1925085afdd3d3dfb3f31900ea4c22cce367c9a417bb3e96dde517461"
+        }
+      ]
+    },
+    {
+      "tag": "v0.1.1",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.1-测试说明.md",
+          "bytes": 2372,
+          "sha256": "cfefdfea8e8e8149ecc4ae01636bb28d3416dcc51640fe654247e0db1b45231a"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.1-源码.zip",
+          "bytes": 18262975,
+          "sha256": "5db155721e78607d05560617e746d8c12f338f899cec26ffc718b768e6e35ac3"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.1.bin",
+          "bytes": 16904433,
+          "sha256": "0f77ce19f1b3e0e1924b1ec766acd87b896d039ac702f073ff45bfbf196f4f5d"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.1.rpk",
+          "bytes": 16904433,
+          "sha256": "0f77ce19f1b3e0e1924b1ec766acd87b896d039ac702f073ff45bfbf196f4f5d"
+        }
+      ]
+    },
+    {
+      "tag": "v0.1.2",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.2-测试说明.md",
+          "bytes": 3403,
+          "sha256": "9d71fff6a1eab5592a7f093747cdb35283d2324ac16e6f310db958299fe1d5e6"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.2-源码.zip",
+          "bytes": 26998674,
+          "sha256": "bdc72e99068ec86e13e97e50385a105777d06049c2fc52567d2ec978c9206460"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.2.bin",
+          "bytes": 22745793,
+          "sha256": "d726408b38161c9459d3c48e607b8247cfbdcadcd713d216419914c8240f0e36"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.2.rpk",
+          "bytes": 22745793,
+          "sha256": "d726408b38161c9459d3c48e607b8247cfbdcadcd713d216419914c8240f0e36"
+        }
+      ]
+    },
+    {
+      "tag": "v0.1.3",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.3-测试说明.md",
+          "bytes": 3877,
+          "sha256": "668bf8fda88cec1f678d5f9610469c9de9b594031808d0b79781a1448084193a"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.3-源码.zip",
+          "bytes": 27125697,
+          "sha256": "9a685375e77d2f45bf565fd7c8663f992e2aceefe8618a482ae37f0d617edb04"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.3.bin",
+          "bytes": 22746193,
+          "sha256": "e4e1a4d4a736949e664ffe9ad4bb669f6d73e5dc7837c658f1c492246744fc74"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.1.3.rpk",
+          "bytes": 22746193,
+          "sha256": "e4e1a4d4a736949e664ffe9ad4bb669f6d73e5dc7837c658f1c492246744fc74"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.0",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.0-场景重制版-SHA256.txt",
+          "bytes": 632,
+          "sha256": "637ab49a13355b2554336e3ac185e86a93432a76f71837b293a7c0341b401fee"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.0-场景重制版-检查报告.json",
+          "bytes": 4207,
+          "sha256": "4f4356d4b143b034b0ad702c86fa7e0a5d92f715d5dea91742befafbaf8cdd03"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.0-场景重制版-源码.zip",
+          "bytes": 26753785,
+          "sha256": "c20951a5cfc6cfc58146984492466d507154d815c00918ae3236ae22b430b7ca"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.0-场景重制版-说明.md",
+          "bytes": 2426,
+          "sha256": "4e6a6e2f87d8fb8a6d48dd6a81a83e3ee1998fbd1483202b1dcfd9026e3b7b68"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.0-场景重制版.bin",
+          "bytes": 24855969,
+          "sha256": "2610192c5a8359c6fe31d6f713d856a52022f8ae7673fb5996bf1adde4ee137f"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.0-场景重制版.rpk",
+          "bytes": 24855969,
+          "sha256": "2610192c5a8359c6fe31d6f713d856a52022f8ae7673fb5996bf1adde4ee137f"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.1",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.1-安装兼容修订-SHA256.txt",
+          "bytes": 647,
+          "sha256": "c331f5430ee99382889b3e9eddcb0116e22d666b6fc65e9276e333ee0869c3a8"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.1-安装兼容修订-检查报告.json",
+          "bytes": 5507,
+          "sha256": "8914f26fc5871634a5a4ace7905fc15579f24f888e1666b2d0fe6929989b8f18"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.1-安装兼容修订-源码.zip",
+          "bytes": 22936309,
+          "sha256": "b5fbb4518523284bfaa925bfb471df3152bcfe27da8d5d706b4919a0c586ba5c"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.1-安装兼容修订-说明.md",
+          "bytes": 2539,
+          "sha256": "04df001a4de39b6e0e7fa08025d8a7bc8616aeb4b771c12ae0bd51c804c71feb"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.1-安装兼容修订.bin",
+          "bytes": 22340273,
+          "sha256": "0206e759b64ae75448ca87f5b59226d3c09fcc496dbc93727d68957268a214a5"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.1-安装兼容修订.rpk",
+          "bytes": 22340273,
+          "sha256": "0206e759b64ae75448ca87f5b59226d3c09fcc496dbc93727d68957268a214a5"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.2",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.2-资源安装修订-SHA256.txt",
+          "bytes": 647,
+          "sha256": "7667be6eb19f04fb5297bd235bb0f54423a3b22f1dd2cd48c3c4ee6e1d89338e"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.2-资源安装修订-检查报告.json",
+          "bytes": 3705,
+          "sha256": "43558c0655c259ab8e93d684bb32987165df825c565ff2dce0d6bab4a78167bb"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.2-资源安装修订-源码.zip",
+          "bytes": 17544163,
+          "sha256": "439dec4bb96f9b1835897cf95b9fe8469c1f1c6d125be2ff5b55b04d647ebad8"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.2-资源安装修订-说明.md",
+          "bytes": 2757,
+          "sha256": "a96c01a6f942bdbb6f5f610e8d3676df6f4ee86f98cf56c204182af40f21790c"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.2-资源安装修订.bin",
+          "bytes": 16767665,
+          "sha256": "e22f10de429fd4c3ac3bc85d59e724d22c1eedd85790323c1a92dd15f1c65196"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.2-资源安装修订.rpk",
+          "bytes": 16767665,
+          "sha256": "e22f10de429fd4c3ac3bc85d59e724d22c1eedd85790323c1a92dd15f1c65196"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.3",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.3-手机与自动播放-SHA256.txt",
+          "bytes": 662,
+          "sha256": "060204fa33143101e7444effab7db80d1ec54b2e580ddd14f05a5e5d3f988848"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.3-手机与自动播放-检查报告.json",
+          "bytes": 2339,
+          "sha256": "105cbbed848bcb124ce8a90fd63d59775135883b7f856eb35de6f34c5b8e9eb9"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.3-手机与自动播放-源码.zip",
+          "bytes": 18255876,
+          "sha256": "c38ad7e8328e7eed24d2675d1eb07bf134a3bbd85b83fdc02b95281e1652a119"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.3-手机与自动播放-说明.md",
+          "bytes": 3057,
+          "sha256": "a0ae6ac5e1d9ad85fe337e411c51379939383b5db8952786eb3e1db6d5ac3006"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.3-手机与自动播放.bin",
+          "bytes": 16820817,
+          "sha256": "41dae06ca62ca685b68b23c1acc06f275f66293c9883f2445dfa08d58b4b6e53"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.3-手机与自动播放.rpk",
+          "bytes": 16820817,
+          "sha256": "41dae06ca62ca685b68b23c1acc06f275f66293c9883f2445dfa08d58b4b6e53"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.4",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.4-章节CG与邮件修订-SHA256.txt",
+          "bytes": 672,
+          "sha256": "41b613cb92c5565829e1837065cbd51f15afcea5aeab6f5d523752833b0ff71f"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.4-章节CG与邮件修订-检查报告.json",
+          "bytes": 22588,
+          "sha256": "db8498fac5f21d7f902b3b0ecfd1e59ad735a0218a2f18088aea6def78d8f01a"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.4-章节CG与邮件修订-源码.zip",
+          "bytes": 19756187,
+          "sha256": "0bcd1fcdb8bd4b72311a963aa7248d07d1dce2a3b4cfb297e3b871cb401bdf28"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.4-章节CG与邮件修订-说明.md",
+          "bytes": 7210,
+          "sha256": "c51e753dafa658edb2806c2ee88138c5e0ae731ecc05b537ecfb59fea210b97b"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.4-章节CG与邮件修订.bin",
+          "bytes": 17356737,
+          "sha256": "fb340503ffcb38dc4cb24b9c9fdb9fecc2ada3d56fbbd55f32033fb8b574da51"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.4-章节CG与邮件修订.rpk",
+          "bytes": 17356737,
+          "sha256": "fb340503ffcb38dc4cb24b9c9fdb9fecc2ada3d56fbbd55f32033fb8b574da51"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.5",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.5-电话重开与界面修订-SHA256.txt",
+          "bytes": 692,
+          "sha256": "1193c297210e6fd291ac168a0a4ad945c1bc3475bbedc8b48fcb5c126626c8d2"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.5-电话重开与界面修订-检查报告.json",
+          "bytes": 10195,
+          "sha256": "294cc2ccfad2d3ad164f93ca2ded336085699faf4d06c220a0388fbae7372fd7"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.5-电话重开与界面修订-源码.zip",
+          "bytes": 21692870,
+          "sha256": "405de6757924c11ff53464eea1b363f570dc110bbd55dd36c250c579e08f0f74"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.5-电话重开与界面修订-说明.md",
+          "bytes": 6524,
+          "sha256": "5e5f5689c1fb25a2d0a48fd9c04434aee953373e292d754360bee1ed6a8ec0f2"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.5-电话重开与界面修订.bin",
+          "bytes": 17395537,
+          "sha256": "78d9719cb88b42a286965c7c3853a25a46a8194239a0fcbe61fe14bfe38f8b27"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.5-电话重开与界面修订.rpk",
+          "bytes": 17395537,
+          "sha256": "78d9719cb88b42a286965c7c3853a25a46a8194239a0fcbe61fe14bfe38f8b27"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.6",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.6-世界线邮件与标题音乐-SHA256.txt",
+          "bytes": 1022,
+          "sha256": "69784d609ab2265174668e08d61ac5c89d6a69c8f75bf41beb28907de09a0c5b"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.6-世界线邮件与标题音乐-世界线核对表.md",
+          "bytes": 5704,
+          "sha256": "777d6382c4e75d65938a556d1caa2fc7358727d658541d23cc2c3e5d278d2256"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.6-世界线邮件与标题音乐-原作动画数值对照.png",
+          "bytes": 1368066,
+          "sha256": "84518ec08172709bac16eeae9eb2e951f17687c2ca8fcb1f7b92a5b42ded6e08"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.6-世界线邮件与标题音乐-检查报告.json",
+          "bytes": 6623,
+          "sha256": "3853550371cd7302a5eae83e125a15ec91e7206ebc763a29065b93e196e9b9ab"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.6-世界线邮件与标题音乐-源码.zip",
+          "bytes": 22755945,
+          "sha256": "3643d34ebd47a57de9554c320c21fdb347cf369ac21c17761569b0ec431a303f"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.6-世界线邮件与标题音乐-说明.md",
+          "bytes": 6927,
+          "sha256": "6d6128c035f07c865aca57a98f3cb646035b7e6da8113457128e3c287eafe2cb"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.6-世界线邮件与标题音乐.bin",
+          "bytes": 19207313,
+          "sha256": "554bceab91fa1bfee39d0dc9d9d973c3228dd6b5a2ca1400161d43f0c0ae11d0"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.6-世界线邮件与标题音乐.rpk",
+          "bytes": 19207313,
+          "sha256": "554bceab91fa1bfee39d0dc9d9d973c3228dd6b5a2ca1400161d43f0c0ae11d0"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.7",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.7-原帧标题动画-SHA256.txt",
+          "bytes": 926,
+          "sha256": "cffa5165c9c45e4cf6bc7c48989b5b4dda76841b36d233027fd12e83a05d9753"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.7-原帧标题动画-世界线核对表.md",
+          "bytes": 5704,
+          "sha256": "777d6382c4e75d65938a556d1caa2fc7358727d658541d23cc2c3e5d278d2256"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.7-原帧标题动画-标题预览.png",
+          "bytes": 136667,
+          "sha256": "ad922a8163bf98185b0d78081a3591dc87f5ff3526827339222629070340caed"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.7-原帧标题动画-检查报告.json",
+          "bytes": 25815,
+          "sha256": "5a832304767f5ede130968736033d95de00b8a39da835c37cb5c8a010acd94bd"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.7-原帧标题动画-源码.zip",
+          "bytes": 24471948,
+          "sha256": "eba0b52aaf8e54d2b1e7f1e5c5f6d94fbe70507012b3bfb7179061bbd206738d"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.7-原帧标题动画-说明.md",
+          "bytes": 6191,
+          "sha256": "32adaf7260e37a929b42bf858074a140362becf7fee6e3da523251223618e167"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.7-原帧标题动画.bin",
+          "bytes": 20516273,
+          "sha256": "d59fab44a0487f67dbeea2d90a615237dffcbb0c46d119814ae049096e4c4042"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.7-原帧标题动画.rpk",
+          "bytes": 20516273,
+          "sha256": "d59fab44a0487f67dbeea2d90a615237dffcbb0c46d119814ae049096e4c4042"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.8",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-EXTRA预览.png",
+          "bytes": 19666,
+          "sha256": "7bfe139312d725b0ef68337d2c0b34805543a3ae33e72ff7e2081e31d32b97ed"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-OP预览.png",
+          "bytes": 79658,
+          "sha256": "59343f32f5246fe04da5f6715c2c1c169fc34543d8ba7532fbf7008212ae0735"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-SHA256.txt",
+          "bytes": 1236,
+          "sha256": "b8655b5ecf353f5f1608b3ec20b5c5d4f7ebba7f861edf7a59e319bafa0ca540"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-世界线核对表.md",
+          "bytes": 5704,
+          "sha256": "777d6382c4e75d65938a556d1caa2fc7358727d658541d23cc2c3e5d278d2256"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-检查报告.json",
+          "bytes": 30104,
+          "sha256": "da725663e7e07dd3d19dc82786f43d4d9336dd7f9b15b376c7c1dee0cbbff34a"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-游戏内OP.mp4",
+          "bytes": 6076835,
+          "sha256": "0d2fcb4f0955b78ba8ad41a859d10c01ccb861551c2a3013f1db86a2311f1d62"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-游戏内OP音轨.mp3",
+          "bytes": 687978,
+          "sha256": "3c229925d2d3c4c5c704bab3c8ccf67d62b5c666708931cd3dc4268cb2fba376"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-源码.zip",
+          "bytes": 24967735,
+          "sha256": "e9ad88f4d47221ffb6a7553d91ee235b5ff48b7a2e5f5f72ccfbe5b26cc3ac6f"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP-说明.md",
+          "bytes": 8449,
+          "sha256": "e3b86e84bb11f0891414d66020f247188953ba2963610fc8cd1e0729954506ad"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP.bin",
+          "bytes": 24818001,
+          "sha256": "ccc8620ec39dc4981f2126fc3efa7b4e7891b75f7483ebd48b9f1e891da68b23"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.8-序章OP.rpk",
+          "bytes": 24818001,
+          "sha256": "ccc8620ec39dc4981f2126fc3efa7b4e7891b75f7483ebd48b9f1e891da68b23"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.9",
+      "files": [
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-OP预览.png",
+          "bytes": 55447,
+          "sha256": "73557a70ceb7638bf971a1f9724ceae6ee6ab520ff9075b4cc3b4b8bab4f27d2"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-SHA256.txt",
+          "bytes": 1327,
+          "sha256": "e6aecd1d27697345e311efee34ba9bd9868ffd3a38af1b9dfa346c2423e2078a"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-世界线核对表.md",
+          "bytes": 5704,
+          "sha256": "777d6382c4e75d65938a556d1caa2fc7358727d658541d23cc2c3e5d278d2256"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-标题预览.png",
+          "bytes": 140590,
+          "sha256": "21c43f17e4d3ea07e78b775416b406e51b307888dea7da1957620b5a06dc7f44"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-检查报告.json",
+          "bytes": 78414,
+          "sha256": "e9fb519bd089bfa3a3b7b4b5bce9d3862a238767e35353b6bc39fea4b0c2d9a6"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-游戏内OP.mp4",
+          "bytes": 8205009,
+          "sha256": "592abd9fb47ef7ac09fbb0ebed8dbe49fd9edfc82637e6c538c35660028a5486"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-游戏内OP音轨.mp3",
+          "bytes": 687978,
+          "sha256": "3c229925d2d3c4c5c704bab3c8ccf67d62b5c666708931cd3dc4268cb2fba376"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-源码.zip",
+          "bytes": 24938147,
+          "sha256": "024fa2a72ec8460b67d9cea29886d2bce719ee5693c38701856a91504393988d"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化-说明.md",
+          "bytes": 10036,
+          "sha256": "4df5306631fb0e5ee02e5a155a1552acb1723c8e09f8565cab5cfd4d218b00c3"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化.bin",
+          "bytes": 24928993,
+          "sha256": "bd189fd7edf0de68e760975a65fc7b1f0a88c6f2754480033d24ced11c7ce316"
+        },
+        {
+          "name": "命运石之门-REDMIWatch5-0.2.9-循环与OP优化.rpk",
+          "bytes": 24928993,
+          "sha256": "bd189fd7edf0de68e760975a65fc7b1f0a88c6f2754480033d24ced11c7ce316"
+        }
+      ]
+    }
+  ]
+}
