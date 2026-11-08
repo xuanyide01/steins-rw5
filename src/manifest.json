@@ -1,8 +1,8 @@
 {
   "package": "com.codex.steins2.rw5",
   "name": "命运石之门",
-  "versionName": "0.3.0",
-  "versionCode": 12,
+  "versionName": "0.3.1",
+  "versionCode": 13,
   "minPlatformVersion": 1000,
   "minAPILevel": 1,
   "icon": "/common/logo.png",

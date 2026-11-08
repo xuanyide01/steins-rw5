@@ -13,6 +13,7 @@
       <div class="title-entry"><image class="original-button" src="/common/ui/load.png" onclick="continueGame"></image></div>
       <div class="title-entry"><image class="original-button" src="/common/ui/extra.png" onclick="openExtra"></image></div>
       <div class="title-entry"><image class="original-button" src="/common/ui/config.png" onclick="openConfig"></image></div>
+      <div class="title-entry"><image class="original-button" src="/common/ui/exit.png" onclick="exitApp"></image></div>
     </div>
     <div if="{{mode === 'extra'}}" class="overlay"><text class="menu-title">EXTRA / 扩展</text><text class="menu-action" onclick="openGallery">CG LIBRARY / CG 鉴赏</text><text class="menu-action" onclick="openRoutes">CHAPTER / 选择章节</text><text class="menu-action" onclick="watchOpening">OP MOVIE / 观看 OP</text><text class="menu-action" onclick="toTitle">RETURN / 返回标题</text></div>
     <div if="{{mode === 'config'}}" class="overlay"><text class="menu-title">CONFIG / 设置</text><text class="menu-action" onclick="toggleSpeed">{{speedLabel}}</text><text class="menu-action" onclick="toggleFont">{{fontLabel}}</text><text class="menu-action" onclick="toggleAutoSpeed">{{autoSpeedLabel}}</text><text class="menu-action" onclick="toggleSound">{{soundLabel}}</text><text class="menu-action" onclick="toggleTitleAnimation">{{titleAnimationLabel}}</text><text class="menu-action" onclick="toTitle">RETURN / 返回标题</text></div>
@@ -161,7 +162,13 @@ export default {
   onHide(){this._hidden=true;if(this._music)this._music.stop();this.clearTyping();if(!this.loading&&this.mode==='play')this.setDisplayText(this.fullText);},
   onDestroy(){if(this._openingPlayer)this._openingPlayer.stop();if(this._music)this._music.destroy();this.clearTyping();this.loadSequence++;this._slotsSequence++;this._gallerySequence++;},
   readRuntime(){file.readText({uri:'/common/graph.txt',complete:()=>{},success:data=>{try{configure(JSON.parse(data.text));this.readProgress();}catch(e){this.fail(e.message);}},fail:()=>this.fail('剧情目录读取失败')});},
-  exitApp(){this.clearTyping();this.$app.exit();},
+  exitApp(){
+    if(this.mode!=='title'||this._exiting)return;
+    this._exiting=true;this._hidden=true;
+    this.clearTyping();
+    if(this._music)this._music.stop();
+    this.$app.exit();
+  },
   readProgress(){this.loading=true;storage.get({complete:()=>{},key:PROGRESS_KEY,default:'',success:data=>{try{this._progress=decodeProgress(data);this.readLatestTitleSave();}catch(e){this.fail(e.message);}},fail:()=>{this.fail('通关记录读取失败，请返回标题重试');}});},
   readLatestTitleSave(){const ready=()=>{this._progressReady=true;this.refreshProgress();this.loading=false;this.syncTitleMusic();this.writeProgress();};if(this._progress.endings['真结局']){ready();return;}let latest=null;const read=i=>storage.get({complete:()=>{},key:slotKey(i),default:'',success:data=>{try{const meta=decodeSlotMeta(data);if(meta&&Number.isFinite(meta.savedAt)&&(!latest||meta.savedAt>latest.savedAt))latest=meta;}catch(e){}finish(i);},fail:()=>finish(i)});const finish=i=>{if(i+1<SLOT_COUNT){read(i+1);return;}if(latest&&latest.savedAt>(this._progress.titleChangedAt||0)){this._progress=titleProgress(this._progress,latest.state.worldline,'save',latest.savedAt);this._progressDirty=true;}ready();};read(0);},
   startNew(){if(this.loading||!this._progressReady)return;this._progress=titleProgress(this._progress,INITIAL_WORLDLINE,'new',Date.now());this._progressDirty=true;this.refreshProgress();this.writeProgress();this.autoEnabled=false;this.refreshSettings();this.clearTyping();this.clearStoryCache();this._slotData=[];this._phoneView=false;this.session=withProgress(newState(catalog.initial,true),this._progress);this.renderFrame();},
@@ -396,7 +403,7 @@ export default {
 .mail-line{width:380px;height:30px;font-size:23px;line-height:30px;flex-shrink:0;lines:1;color:#e3e1cf;background-color:#141512;}
 
 .title-panel{top:286px;height:228px;padding:9px 28px;background-color:#141512;}
-.title-entry{width:376px;height:48px;align-items:center;justify-content:flex-start;padding-left:10px;}
+.title-entry{width:376px;height:42px;align-items:center;justify-content:flex-start;padding-left:10px;}
 .opening-page{position:absolute;left:0px;top:0px;width:432px;height:514px;background-color:#000000;}
 .opening-viewport{position:absolute;left:24px;top:149px;width:384px;height:216px;overflow:hidden;}
 .opening-sheet{position:absolute;top:0px;width:1536px;height:432px;object-fit:contain;}

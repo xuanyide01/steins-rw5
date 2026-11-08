@@ -1,0 +1,11 @@
+{
+  "version": "0.3.1",
+  "device": "REDMI Watch 5",
+  "feedbackDate": "2026-11-08",
+  "source": "Maintainer feedback after receiving the 0.3.1 EXIT build",
+  "verbatimFeedback": "通过，上传github",
+  "physicalTestPassed": true,
+  "scope": "Title screen EXIT revision; no test duration or firmware version was supplied.",
+  "packageBytes": 24896689,
+  "packageSha256": "7aecabef54de3f74dd740a553d137998d88128ddc7113084eda67c00954c2248"
+}

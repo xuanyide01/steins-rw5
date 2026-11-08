@@ -1,0 +1,27 @@
+{
+  "result": "passed",
+  "version": "0.3.1",
+  "device": "Xiaomi Vela watch5.0 virtual watch, 432 × 514",
+  "sha256": "7aecabef54de3f74dd740a553d137998d88128ddc7113084eda67c00954c2248",
+  "outsideTapKeptAppOpen": true,
+  "exitTapDestroyedApp": true,
+  "titleAudioStopped": true,
+  "systemDispatchedHome": true,
+  "reopenedToTitle": true,
+  "systemHomeUi": "This SDK image has no home launcher. The system requests HOME and may retain the last frame.",
+  "physicalDeviceTested": false,
+  "relevantEvents": [
+    "[  225.447700] [94] [  INFO] [ap] [media][media_uv_stream_send:331] Music:0x4066a190 0x4066a970 _ stop _",
+    "[  225.454600] [94] [  INFO] [ap] [quickapp] STEINS2_RW5 audio stopped {\"track\":\"title\",\"loop\":false,\"currentTime\":0,\"duration\":234.080625,\"positionIsEventEstimate\":true}",
+    "[  225.759900] [94] [  INFO] [ap] [AIOTJS] [onDestroy:184] Activity onDestroy",
+    "[  225.760900] [94] [  INFO] [ap] [AIOTJS] [callHook:66] PageCallHook, name:onDestroy argc:0",
+    "[  225.784100] [94] [  INFO] [ap] [AIOTJS] [onEvent:91] AppCallHook name:onDestroy ",
+    "[  225.784500] [94] [  INFO] [ap] [quickapp] STEINS2_RW5 app destroyed",
+    "[  225.784800] [94] [  INFO] [ap] [FEATURE] [system_audio_onDestroy:223] [jidl_feature] audio_impl::system_audio_onDestroy(), FeatureProtoHandle: 0x40763f60",
+    "[  225.785600] [94] [  INFO] [ap] [FEATURE] [system_prompt_onDestroy:71] [jidl_feature] Prompt_impl::system_prompt_onDestroy()",
+    "[  225.786000] [94] [  INFO] [ap] [FEATURE] [system_storage_onDestroy:169] [jidl_feature] storage_impl::system_storage_onDestroy()",
+    "[  226.844200] [94] [  INFO] [ap] [AIOTJS] [onDestroy:56] Application onDestroy",
+    "[  226.851000] [20] [  INFO] [ap] [AMS] start activity, target: action:action.system.HOME  flag:0",
+    "[  226.867800] [20] [ ERROR] [ap] [AMS] can't find target by intent[,action.system.HOME]"
+  ]
+}
